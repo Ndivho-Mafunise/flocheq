@@ -1,11 +1,9 @@
 import Navbar from "../components/Navbar";
 import { Outlet } from "react-router-dom";
 
-export default function AppLayout() {
+export default function PublicLayout() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-
+    <div>
       <main className="flex-1 p-6 bg-gray-50">
         <Outlet />
       </main>
