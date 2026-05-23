@@ -82,7 +82,9 @@ export default function Sidebar() {
             <p className="text-sm uppercase tracking-[0.3em] text-violet-200/80">
               AdFlux
             </p>
-            <h1 className="text-lg font-semibold text-white">Marketing Dashboard</h1>
+            <h1 className="text-lg font-semibold text-white">
+              Marketing Dashboard
+            </h1>
           </div>
         </div>
 

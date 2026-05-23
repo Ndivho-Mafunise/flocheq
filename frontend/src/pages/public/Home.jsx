@@ -24,7 +24,7 @@ export default function Home() {
 
           <div className="mt-10 flex gap-4 justify-center">
             <button className="bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition">
-              Get started
+              <Link to="/login">Get started </Link>
             </button>
 
             <button className="border border-slate-300 px-6 py-3 rounded-full hover:border-slate-400 transition">
@@ -69,9 +69,7 @@ export default function Home() {
         </p>
 
         <button className="mt-8 bg-slate-900 text-white px-6 py-3 rounded-full hover:bg-slate-800 transition">
-         <Link to="/register">
-          Create account
-         </Link>
+          <Link to="/register">Create account</Link>
         </button>
       </section>
     </div>
