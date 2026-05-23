@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="min-h-screen bg-amber-50 text-slate-900">
       {/* HERO */}
       <section className="relative overflow-hidden px-8 py-24 md:py-32">
         {/* background glow */}
@@ -35,23 +35,23 @@ export default function Home() {
       </section>
 
       {/* FEATURES */}
-      <section className="px-8 py-20 bg-slate-50">
+      <section className="px-8 py-20 bg-amber-50">
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+          <div className=" bg-amber-50 p-6 rounded-2xl border border-slate-100 shadow-sm">
             <h3 className="font-semibold text-lg">Fast integration</h3>
             <p className="text-slate-600 mt-2 text-sm">
               Plug into your app in minutes with simple APIs.
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+          <div className=" bg-amber-50 p-6 rounded-2xl border border-slate-100 shadow-sm">
             <h3 className="font-semibold text-lg">Secure payments</h3>
             <p className="text-slate-600 mt-2 text-sm">
               Built-in protection and encryption for all transactions.
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+          <div className=" bg-amber-50 p-6 rounded-2xl border border-slate-100 shadow-sm">
             <h3 className="font-semibold text-lg">Global scale</h3>
             <p className="text-slate-600 mt-2 text-sm">
               Accept payments from users anywhere in the world.
