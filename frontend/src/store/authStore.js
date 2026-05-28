@@ -6,63 +6,62 @@ export const useAuthStore = create((set) => ({
   user: null,
   isLoading: false,
   error: null,
+  message: null,
   isAuthenticated: false,
   isCheckingAuth: true,
 
+  // SIGNUP
   signup: async (form) => {
-    // start loading and clear previous errors
     set({
       isLoading: true,
       error: null,
+      message: null,
     });
 
     try {
-      // send request to backend
       const response = await fetch(`${API_URL}/register`, {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
         },
-
         credentials: "include",
-
         body: JSON.stringify(form),
       });
 
-      // convert response to JSON
       const data = await response.json();
+
       console.log("BACKEND RESPONSE:", data);
 
-      // log backend response
-
-      // if request failed
       if (!response.ok) {
         throw new Error(data.message || "Signup failed");
       }
 
-      // update store if signup succeeds
       set({
         user: data.user,
         isAuthenticated: true,
         isLoading: false,
       });
+
       return data;
     } catch (error) {
-      // log error
       console.log("ERROR:", error.message);
 
-      // update store with error
       set({
         error: error.message,
         isLoading: false,
       });
+
       throw error;
     }
   },
 
+  // VERIFY EMAIL CODE
   verifyCode: async (code) => {
-    set({ isLoading: true, error: null });
+    set({
+      isLoading: true,
+      error: null,
+    });
+
     try {
       const response = await fetch(`${API_URL}/verify-email`, {
         method: "POST",
@@ -74,22 +73,39 @@ export const useAuthStore = create((set) => ({
       });
 
       const data = await response.json();
+
       console.log("BACKEND RESPONSE:", data);
-      set({ isLoading: false, isAuthenticated: true, user: data.user });
 
       if (!response.ok) {
         throw new Error(data.message || "Verification failed");
       }
 
+      set({
+        isLoading: false,
+        isAuthenticated: true,
+        user: data.user,
+      });
+
       return data;
     } catch (error) {
-      set({ isLoading: false, error: error.message });
+      set({
+        isLoading: false,
+        error: error.message,
+      });
+
       console.log(error.message);
+
       throw error;
     }
   },
+
+  // LOGIN
   login: async (form) => {
-    set({ isLoading: true, error: null });
+    set({
+      isLoading: true,
+      error: null,
+    });
+
     try {
       const response = await fetch(`${API_URL}/login`, {
         method: "POST",
@@ -99,19 +115,43 @@ export const useAuthStore = create((set) => ({
         credentials: "include",
         body: JSON.stringify(form),
       });
+
       const data = await response.json();
+
       console.log("BACKEND RESPONSE:", data);
 
-      set({ isLoading: false, isAuthenticated: true, user: data.user });
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      set({
+        isLoading: false,
+        isAuthenticated: true,
+        user: data.user,
+      });
+
       return data;
     } catch (error) {
-      set({ isLoading: false, isAuthenticated: false, user: data.user });
+      set({
+        isLoading: false,
+        isAuthenticated: false,
+        user: null,
+        error: error.message,
+      });
+
       console.log(error.message);
+
       throw error;
     }
   },
+
+  // CHECK AUTH
   checkAuth: async () => {
-    set({ isCheckingAuth: true, error: null });
+    set({
+      isCheckingAuth: true,
+      error: null,
+    });
+
     try {
       const response = await fetch(`${API_URL}/check-auth`, {
         method: "GET",
@@ -120,44 +160,92 @@ export const useAuthStore = create((set) => ({
         },
         credentials: "include",
       });
+
       const data = await response.json();
+
       console.log("BACKEND RESPONSE:", data);
-      if (data.user) {
-        set({ isCheckingAuth: false, isAuthenticated: true, user: data.user });
-      } else {
-        set({ isCheckingAuth: false, isAuthenticated: false, user: null });
+
+      if (!response.ok) {
+        throw new Error(data.message || "Authentication check failed");
       }
+
+      if (data.user) {
+        set({
+          isCheckingAuth: false,
+          isAuthenticated: true,
+          user: data.user,
+        });
+      } else {
+        set({
+          isCheckingAuth: false,
+          isAuthenticated: false,
+          user: null,
+        });
+      }
+
       return data;
     } catch (error) {
-      set({ isCheckingAuth: false, isAuthenticated: false, user: null });
-      console.log(error);
+      set({
+        isCheckingAuth: false,
+        isAuthenticated: false,
+        user: null,
+        error: error.message,
+      });
+
+      console.log(error.message);
     }
   },
 
+  // LOGOUT
   logout: async () => {
-    set({ isLoading: true });
+    set({
+      isLoading: true,
+      error: null,
+    });
 
     try {
-      await fetch(`${API_URL}/logout`, {
+      const response = await fetch(`${API_URL}/logout`, {
         method: "POST",
         credentials: "include",
       });
 
+      const data = await response.json();
+
+      console.log("BACKEND RESPONSE:", data);
+
+      if (!response.ok) {
+        throw new Error(data.message || "Logout failed");
+      }
+
       set({
         user: null,
         isAuthenticated: false,
         isLoading: false,
       });
+
+      return data;
     } catch (error) {
       set({
         user: null,
         isAuthenticated: false,
         isLoading: false,
+        error: error.message,
       });
+
+      console.log(error.message);
+
+      throw error;
     }
   },
+
+  // FORGOT PASSWORD
   forgotPassword: async (email) => {
-    set({ isLoading: true, error: null, message: null });
+    set({
+      isLoading: true,
+      error: null,
+      message: null,
+    });
+
     try {
       const response = await fetch(`${API_URL}/forgot-password`, {
         method: "POST",
@@ -167,31 +255,76 @@ export const useAuthStore = create((set) => ({
         credentials: "include",
         body: JSON.stringify({ email }),
       });
+
       const data = await response.json();
-      console.log(data);
-      set({ isLoading: false, message: data.message });
+
+      console.log("BACKEND RESPONSE:", data);
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to send reset email");
+      }
+
+      set({
+        isLoading: false,
+        message: data.message,
+      });
+
       return data;
     } catch (error) {
-      set({ isLoading: false, error: error.message });
+      set({
+        isLoading: false,
+        error: error.message,
+      });
+
+      console.log(error.message);
+
+      throw error;
     }
   },
-  resetPassword: async (token, formData) => {
-    set({ isLoading: true, error: null, message: null });
+
+  // RESET PASSWORD
+  resetPassword: async (token, password) => {
+    set({
+      isLoading: true,
+      error: null,
+      message: null,
+    });
+
     try {
-      const response = await fetch(`${API_URL}/reset-password/${token}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${API_URL}/reset-password/${token}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ password }),
+        }
+      );
+
       const data = await response.json();
-      console.log(data);
-      set({ isLoading: false, message: data.message });
+
+      console.log("BACKEND RESPONSE:", data);
+
+      if (!response.ok) {
+        throw new Error(data.message || "Password reset failed");
+      }
+
+      set({
+        isLoading: false,
+        message: data.message,
+      });
+
+      return data;
     } catch (error) {
-      set({ isLoading: false, error: error.message });
-      console.log(error);
+      set({
+        isLoading: false,
+        error: error.message,
+      });
+
+      console.log(error.message);
+
       throw error;
     }
   },

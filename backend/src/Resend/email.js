@@ -50,7 +50,7 @@ export const sendResetPasswordEmail = async (email, resetToken) => {
       from: "Acme <onboarding@resend.dev>",
       to: [email],
       subject: "Reset your account password",
-      html: ` <a href= ${resetToken}> reset your password </a>`,
+      html: ` <a href="${resetToken}">Reset your password</a>`,
     });
 
     if (error) {
@@ -59,8 +59,8 @@ export const sendResetPasswordEmail = async (email, resetToken) => {
     }
     return data;
   } catch (error) {
-    console.log("error sending welcome email", error);
-    throw new Error("Error sending welcome email");
+    console.log("error sending reset password email", error);
+    throw new Error("Error sending reset password email");
   }
 };
 

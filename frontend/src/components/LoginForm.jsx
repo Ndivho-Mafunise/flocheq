@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -89,12 +89,13 @@ export function LoginForm({ className, ...props }) {
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
 
-                  <a
-                    href="#"
+                  <Link
                     className="ml-auto text-sm underline hover:underline"
+                    to="/forgot-password"
                   >
-                    Forgot password?
-                  </a>
+                    {" "}
+                    Forgot password?{" "}
+                  </Link>
                 </div>
 
                 <Input
@@ -111,12 +112,7 @@ export function LoginForm({ className, ...props }) {
                 <Button type="submit">Login</Button>
 
                 <FieldDescription className="text-center">
-                  Don’t have an account?{" "}
-                <Link to="/register">
-                Sign Up 
-                </Link>
-               
-         
+                  Don’t have an account? <Link to="/register">Sign Up</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

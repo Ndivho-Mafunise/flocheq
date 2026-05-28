@@ -46,7 +46,7 @@ export const verifyEmail = async (req, res) => {
   }
 };
 
-export const forgetPassword = async (req, res) => {
+export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({
@@ -122,7 +122,7 @@ export const checkAuth = async (req, res) => {
   try {
     const user = await User.findById(req.userId);
     if (!user) {
-     return res.status(401).json({
+      return res.status(401).json({
         success: false,
         message: "Unauthorized",
       });

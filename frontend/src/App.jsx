@@ -19,6 +19,8 @@ import { useEffect } from "react";
 import { ProtectedRoutes } from "./routes/ProtectedRoutes";
 import { PublicRoutes } from "./routes/PublicRoute";
 import { Navigate } from "react-router-dom";
+import ForgotPassword from "./pages/public/ForgotPassword";
+import ResetPassword from "./pages/public/Reset-password";
 
 export default function App() {
   const { checkAuth } = useAuthStore();
@@ -42,6 +44,8 @@ export default function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/verify-email" element={<VerifyCode />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/register" element={<Register />} />
         </Route>
 
