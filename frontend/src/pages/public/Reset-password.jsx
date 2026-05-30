@@ -87,7 +87,7 @@ export default function ResetPassword() {
     try {
       // Matches store: resetPassword(token, body)
       // backend only needs the new password value
-      await resetPassword(token, { password });
+      await resetPassword(token,password );
       setDone(true);
     } catch (err) {
       setError(err?.message || "Something went wrong. Please try again.");
@@ -95,7 +95,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
+    <div className="min-h-[calc(100vh-65px)] bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
           {/* Top accent */}

@@ -37,8 +37,8 @@ export default function Navbar() {
 
         {/* NAV LINKS */}
         <div className="hidden md:flex items-center gap-8 text-sm text-slate-600">
-          <Link to="/payments" className="hover:text-slate-900 transition">
-           Payments
+          <Link to="/pricing" className="hover:text-slate-900 transition">
+            Pricing
           </Link>
 
           {isAuthenticated && (
@@ -48,15 +48,9 @@ export default function Navbar() {
           )}
 
           {!isAuthenticated && (
-            <>
-              <Link to="/login" className="hover:text-slate-900 transition">
-                Login
-              </Link>
-
-              <Link to="/register" className="hover:text-slate-900 transition">
-                Register
-              </Link>
-            </>
+            <Link to="/login" className="hover:text-slate-900 transition">
+              Login
+            </Link>
           )}
         </div>
 

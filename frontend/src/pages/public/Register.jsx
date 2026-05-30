@@ -1,9 +1,9 @@
-import {SignupForm} from "@/components/SignupForm";
+import { SignupForm } from "@/components/SignupForm";
 
 export default function SignupPage() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10">
-      <div className="w-full max-w-sm md:max-w-4xl">
+    <div className="flex min-h-[calc(100vh-65px)] flex-col items-center justify-center gap-6 bg-slate-50 p-6 md:p-10">
+      <div className="w-full max-w-sm">
         <SignupForm />
       </div>
     </div>
