@@ -1,7 +1,6 @@
 # Flocheq — SaaS Payments Dashboard
 
-A revenue tracking dashboard for an independent software developer. You log clients, and every payment you receive from them — whether it's a one-off service invoice, a product license, or a monthly subscription — gets recorded as a transaction. The dashboard then aggregates those transactions into charts, KPIs, and reports so you always know where your money is coming from.
-
+A revenue tracking dashboard for independent software developers and SaaS businesses. You log clients, and every payment you receive — whether it's a one-off service invoice, a product license, or a monthly subscription — gets recorded as a transaction. The dashboard aggregates those transactions into charts, KPIs, and reports so you always know exactly where your money is coming from, built for teams billing international clients.
 
 > **Status:** Core platform built and tested. Currently integrating payment processors and account balance infrastructure.
 
