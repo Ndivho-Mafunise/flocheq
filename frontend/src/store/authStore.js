@@ -165,9 +165,15 @@ export const useAuthStore = create((set) => ({
 
       const data = await response.json();
 
-      // 401 means not logged in — expected on public pages, not an error
+      // 401 means not logged in — expected on public pages, not an error.
+      // Use functional setter: if login() already set isAuthenticated:true
+      // while this request was in-flight, don't overwrite it.
       if (response.status === 401) {
-        set({ isCheckingAuth: false, isAuthenticated: false, user: null });
+        set((state) =>
+          state.isAuthenticated
+            ? { isCheckingAuth: false }
+            : { isCheckingAuth: false, isAuthenticated: false, user: null }
+        );
         return;
       }
 
@@ -182,21 +188,20 @@ export const useAuthStore = create((set) => ({
           user: data.user,
         });
       } else {
-        set({
-          isCheckingAuth: false,
-          isAuthenticated: false,
-          user: null,
-        });
+        set((state) =>
+          state.isAuthenticated
+            ? { isCheckingAuth: false }
+            : { isCheckingAuth: false, isAuthenticated: false, user: null }
+        );
       }
 
       return data;
     } catch (error) {
-      set({
+      set((state) => ({
         isCheckingAuth: false,
-        isAuthenticated: false,
-        user: null,
+        ...(state.isAuthenticated ? {} : { isAuthenticated: false, user: null }),
         error: error.message,
-      });
+      }));
 
       console.log(error.message);
     }
