@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { useNavigate, Link } from "react-router-dom";
 import { Loader2, AlertCircle } from "lucide-react";
@@ -9,8 +9,10 @@ import { Label } from "@/components/ui/label";
 
 export function LoginForm({ className, ...props }) {
   const [form, setForm] = useState({ email: "", password: "" });
-  const { login, isLoading, error } = useAuthStore();
+  const { login, isLoading, error, clearError } = useAuthStore();
   const navigate = useNavigate();
+
+  useEffect(() => { clearError(); }, []);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -26,14 +28,14 @@ export function LoginForm({ className, ...props }) {
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden" style={{ boxShadow: "0 4px 12px -2px rgb(16 24 40 / 0.08)" }}>
         <div className="h-1 bg-indigo-600" />
 
-        <div className="p-8">
+        <div className="p-[30px]">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-slate-900">Welcome back</h1>
             <p className="text-slate-500 text-sm mt-1">
-              Sign in to your PayLa account
+              Sign in to your Flocheq account
             </p>
           </div>
 

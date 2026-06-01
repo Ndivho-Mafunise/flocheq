@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
 import {
@@ -19,8 +19,10 @@ import { Label } from "@/components/ui/label";
      useNavigate   →  back to /login
 ───────────────────────────────────────── */
 export default function ForgotPassword() {
-  const { forgotPassword, isLoading, error } = useAuthStore();
+  const { forgotPassword, isLoading, error, clearError } = useAuthStore();
   const navigate = useNavigate();
+
+  useEffect(() => { clearError(); }, []);
 
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
@@ -44,7 +46,7 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-65px)] bg-slate-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Card */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">

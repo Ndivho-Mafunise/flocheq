@@ -64,7 +64,7 @@ export default function Home() {
       <section className="px-6 py-20 bg-slate-50">
         <div className="max-w-5xl mx-auto">
           <p className="text-center text-sm font-semibold uppercase tracking-widest text-indigo-600 mb-3">
-            Why PayLa
+            Why Flocheq
           </p>
           <h2 className="text-center text-3xl font-bold text-slate-900 mb-12">
             Everything you need to get paid
@@ -92,7 +92,7 @@ export default function Home() {
       {/* BOTTOM CTA */}
       <section className="px-6 py-24 text-center bg-white">
         <h2 className="text-3xl font-bold text-slate-900">
-          Start building with PayLa today
+          Start building with Flocheq today
         </h2>
         <p className="text-slate-500 mt-3 text-sm">
           No setup fees. No hidden complexity. Just build.

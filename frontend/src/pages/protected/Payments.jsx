@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Bell } from "lucide-react";
 
 import { Badge }     from "@/components/ui/badge";
 import { Button }    from "@/components/ui/button";
@@ -76,9 +76,17 @@ export default function Payments() {
           <ChevronRight size={13} className="text-muted-foreground/40" />
           <span className="font-medium">Payments</span>
         </div>
-        <Button size="sm" className="text-[12px] h-7 bg-indigo-600 hover:bg-indigo-700">
-          + New payment
-        </Button>
+        <div className="flex items-center gap-2.5">
+          <button className="relative w-8 h-8 flex items-center justify-center rounded-md hover:bg-muted transition-colors text-foreground">
+            <Bell size={16} />
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+          </button>
+          <span className="w-px h-5 bg-border" />
+          <Button variant="outline" size="sm" className="text-[12px] h-7">Export</Button>
+          <Button size="sm" className="text-[12px] h-7 bg-indigo-600 hover:bg-indigo-700">
+            + Record payment
+          </Button>
+        </div>
       </header>
 
       <main className="flex-1 overflow-y-auto p-5 space-y-4 bg-muted/30">
@@ -102,37 +110,17 @@ export default function Payments() {
 
         {/* Transactions table card */}
         <Card className="shadow-none border">
-          <CardHeader className="px-5 pt-4 pb-0">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-[13px] font-semibold">Transactions</CardTitle>
-
-              {/* Type filter pills */}
-              <div className="flex items-center gap-1">
-                {["", "service", "product", "subscription"].map((t) => (
-                  <button
-                    key={t || "all-type"}
-                    onClick={() => { setTypeFilter(t); setPage(1); }}
-                    className={`px-2.5 py-1 text-[11px] rounded-md transition-colors ${
-                      typeFilter === t
-                        ? "bg-accent text-accent-foreground font-medium"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    }`}
-                  >
-                    {t ? t.charAt(0).toUpperCase() + t.slice(1) : "All types"}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Status filter tabs */}
-            <div className="flex items-center gap-0 mt-3 border-b">
+          {/* Toolbar */}
+          <div className="flex items-center justify-between gap-3 px-5 py-3 border-b flex-wrap">
+            {/* Status tabs — segmented control */}
+            <div className="flex gap-0.5 bg-muted p-0.5 rounded-md">
               {["", "paid", "pending", "failed", "refunded"].map((s) => (
                 <button
                   key={s || "all-status"}
                   onClick={() => { setStatusFilter(s); setPage(1); }}
-                  className={`px-3 py-2 text-[12px] font-medium -mb-px transition-colors ${
+                  className={`px-3 py-1 text-[12px] font-medium rounded transition-colors ${
                     statusFilter === s
-                      ? "border-b-2 border-indigo-600 text-indigo-600"
+                      ? "bg-background text-foreground shadow-sm"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -140,7 +128,23 @@ export default function Payments() {
                 </button>
               ))}
             </div>
-          </CardHeader>
+            {/* Type pills */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {["", "service", "product", "subscription"].map((t) => (
+                <button
+                  key={t || "all-type"}
+                  onClick={() => { setTypeFilter(t); setPage(1); }}
+                  className={`px-3 py-1 text-[12px] border rounded-full transition-colors ${
+                    typeFilter === t
+                      ? "bg-foreground text-background border-foreground"
+                      : "bg-background text-muted-foreground border-border hover:border-foreground/30"
+                  }`}
+                >
+                  {t ? t.charAt(0).toUpperCase() + t.slice(1) : "All"}
+                </button>
+              ))}
+            </div>
+          </div>
 
           <CardContent className="p-0">
             {loading ? (

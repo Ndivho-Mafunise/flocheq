@@ -19,20 +19,8 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/70 backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* LOGO */}
-        <Link
-          to="/"
-          className="
-            flex
-            items-center
-            gap-2
-            text-xl
-            font-semibold
-            tracking-tight
-            text-slate-900
-          "
-        >
-          <div className="w-7 h-7 rounded-full bg-indigo-600"></div>
-          PayLa
+        <Link to="/" className="flex items-center">
+          <img src="/flocheq-logo-v2.png" alt="Flocheq" className="h-15 w-auto" />
         </Link>
 
         {/* NAV LINKS */}

@@ -8,7 +8,6 @@ import {
   ReceiptText,
   Settings,
   ShieldCheck,
-  Sparkles,
   Users,
 } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
@@ -74,13 +73,13 @@ export default function Sidebar() {
     <aside className="flex w-full shrink-0 flex-col border-r border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.98),rgba(15,23,42,0.92))] px-4 pb-4 pt-5 backdrop-blur-xl md:w-80">
       <div className="rounded-[28px] border border-white/10 bg-white/[0.03] px-4 py-4 shadow-[0_24px_80px_rgba(15,23,42,0.45)]">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-cyan-400 text-white shadow-[0_16px_40px_rgba(99,102,241,0.35)]">
-            <Sparkles size={20} />
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl overflow-hidden bg-white/10 shadow-[0_16px_40px_rgba(99,102,241,0.35)]">
+            <img src="/flocheq-logo-v2.png" alt="Flocheq" className="h-full w-full object-contain" />
           </div>
 
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-violet-200/80">
-              AdFlux
+              Flocheq
             </p>
             <h1 className="text-lg font-semibold text-white">
               Marketing Dashboard

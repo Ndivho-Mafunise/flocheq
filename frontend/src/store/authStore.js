@@ -10,6 +10,8 @@ export const useAuthStore = create((set) => ({
   isAuthenticated: false,
   isCheckingAuth: true,
 
+  clearError: () => set({ error: null }),
+
   // SIGNUP
   signup: async (form) => {
     set({
@@ -163,7 +165,11 @@ export const useAuthStore = create((set) => ({
 
       const data = await response.json();
 
-      console.log("BACKEND RESPONSE:", data);
+      // 401 means not logged in — expected on public pages, not an error
+      if (response.status === 401) {
+        set({ isCheckingAuth: false, isAuthenticated: false, user: null });
+        return;
+      }
 
       if (!response.ok) {
         throw new Error(data.message || "Authentication check failed");

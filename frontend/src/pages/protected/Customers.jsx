@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
-import { ChevronRight, Search } from "lucide-react";
+import { ChevronRight, Search, Bell } from "lucide-react";
 
-import { Badge }     from "@/components/ui/badge";
 import { Button }    from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const CUSTOMERS_URL = import.meta.env.VITE_CUSTOMERS_URL;
 
-// plan → badge colours
-const planCls = {
-  enterprise: "bg-indigo-50 text-indigo-700",
-  pro:        "bg-sky-50    text-sky-700",
-  starter:    "bg-emerald-50 text-emerald-700",
-  free:       "bg-slate-100 text-slate-600",
+const PLAN_COLOR = {
+  enterprise: "#6366f1",
+  pro:        "#38bdf8",
+  starter:    "#34d399",
+  free:       "#94a3b8",
 };
 
 function getInitials(name = "") {
@@ -76,9 +74,17 @@ export default function Customers() {
           <ChevronRight size={13} className="text-muted-foreground/40" />
           <span className="font-medium">Customers</span>
         </div>
-        <Button size="sm" className="text-[12px] h-7 bg-indigo-600 hover:bg-indigo-700">
-          + Add customer
-        </Button>
+        <div className="flex items-center gap-2.5">
+          <button className="relative w-8 h-8 flex items-center justify-center rounded-md hover:bg-muted transition-colors text-foreground">
+            <Bell size={16} />
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+          </button>
+          <span className="w-px h-5 bg-border" />
+          <Button variant="outline" size="sm" className="text-[12px] h-7">Import</Button>
+          <Button size="sm" className="text-[12px] h-7 bg-indigo-600 hover:bg-indigo-700">
+            + Add client
+          </Button>
+        </div>
       </header>
 
       <main className="flex-1 overflow-y-auto p-5 space-y-4 bg-muted/30">
@@ -102,39 +108,36 @@ export default function Customers() {
 
         {/* Customers table card */}
         <Card className="shadow-none border">
-          <CardHeader className="px-5 pt-4 pb-3 border-b">
-            <div className="flex items-center justify-between gap-4">
-
-              {/* Search */}
-              <div className="relative flex-1 max-w-xs">
-                <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Search customers…"
-                  value={search}
-                  onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-                  className="w-full pl-8 pr-3 py-1.5 text-[12px] rounded-md border bg-background focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                />
-              </div>
-
-              {/* Plan filter pills */}
-              <div className="flex items-center gap-1">
-                {["", "enterprise", "pro", "starter", "free"].map((p) => (
-                  <button
-                    key={p || "all-plan"}
-                    onClick={() => { setPlanFilter(p); setPage(1); }}
-                    className={`px-2.5 py-1 text-[11px] rounded-md transition-colors ${
-                      planFilter === p
-                        ? "bg-accent text-accent-foreground font-medium"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    }`}
-                  >
-                    {p ? p.charAt(0).toUpperCase() + p.slice(1) : "All plans"}
-                  </button>
-                ))}
-              </div>
+          {/* Toolbar */}
+          <div className="flex items-center justify-between gap-3 px-5 py-3 border-b flex-wrap">
+            {/* Search */}
+            <div className="flex items-center gap-2 px-3 h-8 border border-border rounded-md text-muted-foreground min-w-[240px] focus-within:border-indigo-600 focus-within:ring-[3px] focus-within:ring-indigo-600/[0.18] transition-all">
+              <Search size={14} />
+              <input
+                type="text"
+                placeholder="Search clients…"
+                value={search}
+                onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+                className="border-0 outline-0 bg-transparent text-[13px] text-foreground w-full placeholder:text-muted-foreground"
+              />
             </div>
-          </CardHeader>
+            {/* Plan pills */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {["", "enterprise", "pro", "starter", "free"].map((p) => (
+                <button
+                  key={p || "all-plan"}
+                  onClick={() => { setPlanFilter(p); setPage(1); }}
+                  className={`px-3 py-1 text-[12px] border rounded-full transition-colors ${
+                    planFilter === p
+                      ? "bg-foreground text-background border-foreground"
+                      : "bg-background text-muted-foreground border-border hover:border-foreground/30"
+                  }`}
+                >
+                  {p ? p.charAt(0).toUpperCase() + p.slice(1) : "All"}
+                </button>
+              ))}
+            </div>
+          </div>
 
           <CardContent className="p-0">
             {loading ? (
@@ -180,9 +183,10 @@ export default function Customers() {
 
                           {/* Plan */}
                           <td className="px-5 py-3">
-                            <Badge className={`text-[10px] px-1.5 h-4 border-0 ${planCls[c.plan] ?? ""}`}>
-                              {c.plan}
-                            </Badge>
+                            <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium">
+                              <span className="w-2 h-2 rounded-full shrink-0" style={{ background: PLAN_COLOR[c.plan] }} />
+                              <span className="capitalize">{c.plan}</span>
+                            </span>
                           </td>
 
                           {/* LTV */}
@@ -190,16 +194,15 @@ export default function Customers() {
                             ${c.ltv.toLocaleString()}
                           </td>
 
-                          {/* Status dot + label */}
+                          {/* Status pill */}
                           <td className="px-5 py-3">
-                            <div className="flex items-center gap-1.5">
-                              <span
-                                className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                                  c.status === "active" ? "bg-emerald-500" : "bg-rose-400"
-                                }`}
-                              />
-                              <span className="text-[12px] capitalize">{c.status}</span>
-                            </div>
+                            <span className={`inline-flex items-center text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                              c.status === "active"
+                                ? "bg-emerald-50 text-emerald-700"
+                                : "bg-rose-50 text-rose-600"
+                            }`}>
+                              {c.status === "active" ? "Active" : "Churned"}
+                            </span>
                           </td>
 
                           {/* Acquisition channel */}

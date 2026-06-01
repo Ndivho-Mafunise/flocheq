@@ -53,14 +53,14 @@ export function SignupForm({ className, ...props }) {
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden" style={{ boxShadow: "0 4px 12px -2px rgb(16 24 40 / 0.08)" }}>
         <div className="h-1 bg-indigo-600" />
 
-        <div className="p-8">
+        <div className="p-[30px]">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-slate-900">Create your account</h1>
             <p className="text-slate-500 text-sm mt-1">
-              Get started with PayLa — free to try
+              Get started with Flocheq — free to try
             </p>
           </div>
 

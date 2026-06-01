@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronRight, ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { ChevronRight, ArrowUpRight, ArrowDownRight, Bell } from "lucide-react";
 
 import {
   AreaChart,
@@ -80,7 +80,14 @@ export default function Insights() {
           <ChevronRight size={13} className="text-muted-foreground/40" />
           <span className="font-medium">Insights</span>
         </div>
-        <Button variant="outline" size="sm" className="text-[12px] h-7">Export</Button>
+        <div className="flex items-center gap-2.5">
+          <button className="relative w-8 h-8 flex items-center justify-center rounded-md hover:bg-muted transition-colors text-foreground">
+            <Bell size={16} />
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+          </button>
+          <span className="w-px h-5 bg-border" />
+          <Button variant="outline" size="sm" className="text-[12px] h-7">Last 12 months</Button>
+        </div>
       </header>
 
       <main className="flex-1 overflow-y-auto p-5 space-y-4 bg-muted/30">

@@ -120,7 +120,7 @@ export default function MainLayout() {
             </div>
             <div className="flex-1 text-left min-w-0">
               <p className="text-[13px] font-semibold truncate leading-tight">SaaSboard Inc.</p>
-              <p className="text-[11px] text-muted-foreground leading-tight">Production</p>
+              <p className="text-[11px] text-muted-foreground leading-tight">Development</p>
             </div>
             <ChevronDown size={13} className="text-muted-foreground shrink-0" />
           </button>
@@ -134,7 +134,7 @@ export default function MainLayout() {
                   className="w-full text-left px-3 py-2 hover:bg-accent transition-colors flex items-center justify-between"
                 >
                   <span>{env}</span>
-                  {env === "Production" && <CircleDot size={11} className="text-emerald-500" />}
+                  {env === "Development" && <CircleDot size={11} className="text-emerald-500" />}
                 </button>
               ))}
             </div>

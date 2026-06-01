@@ -28,6 +28,7 @@ export default function Pricing() {
   return (
     <div className="min-h-screen bg-slate-50 px-6 py-12">
       <div className="mx-auto max-w-6xl">
+      
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">Pricing</p>
           <h1 className="mt-4 text-4xl font-bold text-slate-900 md:text-5xl">

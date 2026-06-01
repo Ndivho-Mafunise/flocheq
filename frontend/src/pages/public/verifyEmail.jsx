@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "./../../store/authStore";
 import { MailCheck, Loader2, AlertCircle, ArrowLeft } from "lucide-react";
@@ -9,7 +9,9 @@ import { Label } from "@/components/ui/label";
 export default function VerifyEmail() {
   const [code, setCode] = useState("");
   const navigate = useNavigate();
-  const { verifyCode, isLoading, error } = useAuthStore();
+  const { verifyCode, isLoading, error, clearError } = useAuthStore();
+
+  useEffect(() => { clearError(); }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +22,7 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-65px)] bg-slate-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
           <div className="h-1 bg-indigo-600" />

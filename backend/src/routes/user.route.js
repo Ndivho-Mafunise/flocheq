@@ -7,10 +7,11 @@ import {
   verifyEmail,
 } from "../controllers/auth.controller.js";
 import { verifyToken } from "../middleware/verifyToken.js";
+import { blockRegistration } from "../middleware/blockRegistration.js";
 
 const router = Router();
 
-router.route("/register").post(signupUser);
+router.route("/register").post(blockRegistration, signupUser);
 router.route("/login").post(login);
 router.route("/logout").post(logout);
 router.route("/verify-email").post(verifyEmail);
