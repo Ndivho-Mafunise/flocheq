@@ -8,7 +8,7 @@ A revenue tracking dashboard for independent software developers and SaaS busine
 
 ## Demo
 
-![Flocheq Dashboard](<flocheq dashboard.gif>)
+![Flocheq Dashboard](<screenshots/flocheq dashboard.gif>)
 
 ---
 
