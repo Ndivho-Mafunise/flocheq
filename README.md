@@ -6,6 +6,12 @@ A revenue tracking dashboard for independent software developers and SaaS busine
 
 ---
 
+## Demo
+
+![Flocheq Dashboard](<flocheq dashboard.gif>)
+
+---
+
 ## Why I Built This
 
 Most SaaS founders start by bolting Stripe onto their product and spending hours cross-referencing dashboards to understand their revenue picture. Flocheq is the layer that sits on top — a clean, developer-first interface for tracking what's coming in, from whom, and in what form.
