@@ -109,7 +109,7 @@ Transaction   — customer ref, amount, type (service/product/subscription),
 └──────────────────┬──────────────────────────────┘
                    │ fetch (credentials: include)
 ┌──────────────────▼──────────────────────────────┐
-│              Express REST API (:4000)            │
+│              Express REST API (:6000)            │
 │  verifyToken middleware on all protected routes  │
 │  /api/v1/auth  /dashboard  /customers            │
 │  /transactions  /insights  /reports              │
@@ -141,13 +141,13 @@ The platform is production-ready at the infrastructure level. The next layer is 
 cd backend
 cp .env.example .env        # MONGODB_URI, SECRET, RESEND_API_KEY, CLIENT_URL
 npm install
-npm run dev                 # http://localhost:4000
+npm run dev                 # http://localhost:6000
 
 # 2. Frontend
 cd frontend
 cp .env.example .env        # VITE_API_URL, VITE_DASHBOARD_URL, etc.
 npm install
-npm run dev                 # http://localhost:5173
+npm run dev                 # http://localhost:5000
 
 # 3. E2E Tests (both servers must be running)
 cd playwright
