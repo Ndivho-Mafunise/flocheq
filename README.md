@@ -140,6 +140,15 @@ The platform is production-ready at the infrastructure level. The next layer is 
 
 ---
 
+## Test Credentials
+
+| Field | Value |
+|-------|-------|
+| Email | `user@test.dev` |
+| Password | `pass_123` |
+
+---
+
 ## Getting Started
 
 ```bash
