@@ -8,6 +8,8 @@ A revenue tracking dashboard for independent software developers and SaaS busine
 
 ## Demo
 
+**Live:** [https://flocheq-frontend.vercel.app](https://flocheq-frontend.vercel.app)
+
 ![Flocheq Dashboard](<screenshots/flocheq dashboard.gif>)
 
 ---
