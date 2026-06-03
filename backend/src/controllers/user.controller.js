@@ -58,14 +58,16 @@ export const signupUser = async (req, res) => {
       });
     }
 
-    const userObj = user.toObject();
-    // send response
     res.status(201).json({
       success: true,
       message: "User registered successfully, verification email sent",
       user: {
-        ...userObj,
-        password: null,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isVerified: user.isVerified,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     });
   } catch (error) {
@@ -112,14 +114,16 @@ export const login = async (req, res) => {
       });
     }
 
-    const userObj = user.toObject();
-
     return res.status(200).json({
       success: true,
       message: "User logged in",
       user: {
-        ...userObj,
-        password: null,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isVerified: user.isVerified,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     });
   } catch (error) {
@@ -132,7 +136,11 @@ export const login = async (req, res) => {
 };
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
     return res.status(200).json({
       success: true,
       message: "Logged out successfully ",

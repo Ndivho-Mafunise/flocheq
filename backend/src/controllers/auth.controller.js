@@ -127,13 +127,16 @@ export const checkAuth = async (req, res) => {
         message: "Unauthorized",
       });
     }
-    const userObj = user.toObject();
     return res.status(200).json({
       success: true,
       message: "user Authorized",
       user: {
-        ...userObj,
-        password: null,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isVerified: user.isVerified,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     });
   } catch (error) {
