@@ -7,7 +7,7 @@ A revenue tracking dashboard for independent software developers and SaaS busine
 ---
 
 ## Demo
-
+> **Note:** The frontend is hosted on Vercel and the backend on Render. If the API has been inactive, the first request may take a few moments while the backend wakes up.
 **Live:** [https://flocheq-frontend.vercel.app](https://flocheq-frontend.vercel.app)
 
 ![Flocheq Dashboard](<screenshots/flocheq dashboard.gif>)
