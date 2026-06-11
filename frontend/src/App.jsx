@@ -29,6 +29,7 @@ import { useEffect }       from "react";
 import { ProtectedRoutes } from "./routes/ProtectedRoutes";
 import { PublicRoutes }    from "./routes/PublicRoute";
 import { Navigate }        from "react-router-dom";
+import NotFound            from "./pages/public/NotFound";
 
 export default function App() {
   const { checkAuth } = useAuthStore();
@@ -70,6 +71,8 @@ export default function App() {
           <Route path="/subscriptions"   element={<Subscriptions />} />
           <Route path="/payment-methods" element={<PaymentMethods />} />
         </Route>
+
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
     </BrowserRouter>

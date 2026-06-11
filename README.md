@@ -7,6 +7,8 @@ A revenue tracking dashboard for independent software developers and SaaS busine
 ---
 
 ## Demo
+> **Note:** The frontend is hosted on Vercel and the backend on Render. If the API has been inactive, the first request may take a few moments while the backend wakes up.
+**Live:** [https://flocheq-frontend.vercel.app](https://flocheq-frontend.vercel.app)
 
 ![Flocheq Dashboard](<screenshots/flocheq dashboard.gif>)
 
@@ -137,6 +139,15 @@ The platform is production-ready at the infrastructure level. The next layer is 
 - **User account balances** — wallet model tracking available balance, pending funds, and transaction history per user (model stubbed, controller and routes in progress)
 - **Webhook handling** — inbound event processing for payment status updates
 - **Multi-currency** — exchange rate conversion for international clients
+
+---
+
+## Test Credentials
+
+| Field | Value |
+|-------|-------|
+| Email | `user@test.dev` |
+| Password | `pass_123` |
 
 ---
 
