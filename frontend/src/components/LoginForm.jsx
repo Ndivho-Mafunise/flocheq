@@ -29,7 +29,7 @@ export function LoginForm({ className, ...props }) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden" style={{ boxShadow: "0 4px 12px -2px rgb(16 24 40 / 0.08)" }}>
-        <div className="h-1 bg-indigo-600" />
+        <div className="h-1 bg-brand-600" />
 
         <div className="p-[30px]">
           <div className="mb-6">
@@ -64,7 +64,7 @@ export function LoginForm({ className, ...props }) {
                 </Label>
                 <Link
                   to="/forgot-password"
-                  className="text-xs text-indigo-600 hover:underline"
+                  className="text-xs text-brand-600 hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -90,7 +90,7 @@ export function LoginForm({ className, ...props }) {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-medium"
+              className="w-full h-10 bg-brand-600 hover:bg-brand-700 text-white font-medium"
             >
               {isLoading ? (
                 <>
@@ -105,7 +105,7 @@ export function LoginForm({ className, ...props }) {
 
           <p className="mt-6 text-center text-sm text-slate-500">
             Don't have an account?{" "}
-            <Link to="/register" className="text-indigo-600 font-medium hover:underline">
+            <Link to="/register" className="text-brand-600 font-medium hover:underline">
               Sign up
             </Link>
           </p>

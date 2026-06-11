@@ -78,17 +78,7 @@ export default function Navbar() {
           ) : (
             <Link
               to="/register"
-              className="
-                px-5
-                py-2
-                rounded-full
-                bg-slate-900
-                text-white
-                text-sm
-                font-medium
-                hover:bg-slate-800
-                transition
-              "
+              className="px-5 py-2 rounded-full bg-brand-600 text-white text-sm font-medium hover:bg-brand-700 transition"
             >
               Sign up
             </Link>

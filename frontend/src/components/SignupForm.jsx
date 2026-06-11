@@ -54,7 +54,7 @@ export function SignupForm({ className, ...props }) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden" style={{ boxShadow: "0 4px 12px -2px rgb(16 24 40 / 0.08)" }}>
-        <div className="h-1 bg-indigo-600" />
+        <div className="h-1 bg-brand-600" />
 
         <div className="p-[30px]">
           <div className="mb-6">
@@ -141,7 +141,7 @@ export function SignupForm({ className, ...props }) {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-medium"
+              className="w-full h-10 bg-brand-600 hover:bg-brand-700 text-white font-medium"
             >
               {isLoading ? (
                 <>
@@ -156,7 +156,7 @@ export function SignupForm({ className, ...props }) {
 
           <p className="mt-6 text-center text-sm text-slate-500">
             Already have an account?{" "}
-            <Link to="/login" className="text-indigo-600 font-medium hover:underline">
+            <Link to="/login" className="text-brand-600 font-medium hover:underline">
               Sign in
             </Link>
           </p>
