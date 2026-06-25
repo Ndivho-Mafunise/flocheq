@@ -201,12 +201,13 @@ export default function MainLayout() {
         {/* Bottom links + logout + user */}
         <div className="px-2 py-3 space-y-0.5">
           {[
-            { label: "Docs",     icon: BookOpen, external: true  },
-            { label: "Support",  icon: LifeBuoy, external: true  },
-            { label: "Settings", icon: Settings, external: false },
-          ].map(({ label, icon: Icon, external }) => (
+            { label: "Docs",     icon: BookOpen, external: true,  path: null         },
+            { label: "Support",  icon: LifeBuoy, external: true,  path: null         },
+            { label: "Settings", icon: Settings, external: false, path: "/settings"  },
+          ].map(({ label, icon: Icon, external, path }) => (
             <button
               key={label}
+              onClick={() => path && navigate(path)}
               className="w-full flex items-center gap-2.5 px-2 py-[6px] rounded-md text-[13px] text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
             >
               <Icon size={15} className="shrink-0" />
