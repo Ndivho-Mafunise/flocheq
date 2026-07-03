@@ -20,9 +20,27 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: function () {
+        return !this.googleId;
+      },
       minlength: 6,
       select: false,
+    },
+
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+
+    provider: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
+    },
+
+    avatar: {
+      type: String,
     },
 
     // These fields power email verification + password reset flows safely.
