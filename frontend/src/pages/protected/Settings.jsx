@@ -1,17 +1,25 @@
 import { useState } from "react";
-import { ChevronRight, Bell, User, Lock, BellRing, Building2, Trash2 } from "lucide-react";
-import { Button }           from "@/components/ui/button";
-import { Input }            from "@/components/ui/input";
+import {
+  ChevronRight,
+  Bell,
+  User,
+  Lock,
+  BellRing,
+  Building2,
+  Trash2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator }        from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { useAuthStore }     from "../../store/authStore";
+import { useAuthStore } from "../../store/authStore";
 
 const tabs = [
-  { id: "profile",       label: "Profile",       icon: User       },
-  { id: "security",      label: "Security",       icon: Lock       },
-  { id: "notifications", label: "Notifications",  icon: BellRing   },
-  { id: "organization",  label: "Organization",   icon: Building2  },
+  { id: "profile", label: "Profile", icon: User },
+  { id: "security", label: "Security", icon: Lock },
+  { id: "notifications", label: "Notifications", icon: BellRing },
+  { id: "organization", label: "Organization", icon: Building2 },
 ];
 
 function Field({ label, hint, children }) {
@@ -19,7 +27,11 @@ function Field({ label, hint, children }) {
     <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-[180px,1fr] sm:items-start sm:gap-4">
       <div className="pt-1.5">
         <p className="text-[13px] font-medium text-foreground">{label}</p>
-        {hint && <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">{hint}</p>}
+        {hint && (
+          <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
+            {hint}
+          </p>
+        )}
       </div>
       <div>{children}</div>
     </div>
@@ -42,7 +54,7 @@ function Toggle({ checked, onChange }) {
 }
 
 function ProfileTab({ user }) {
-  const [name,  setName]  = useState(user?.name  || "");
+  const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
 
   return (
@@ -50,24 +62,48 @@ function ProfileTab({ user }) {
       <div className="flex items-center gap-4">
         <Avatar className="w-14 h-14">
           <AvatarFallback className="text-[16px] font-bold bg-indigo-100 text-indigo-700">
-            {(name || "U").split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
+            {(name || "U")
+              .split(" ")
+              .map((w) => w[0])
+              .join("")
+              .slice(0, 2)
+              .toUpperCase()}
           </AvatarFallback>
         </Avatar>
         <div>
           <p className="text-[13px] font-medium">{name || "Your name"}</p>
-          <p className="text-[12px] text-muted-foreground">{email || "your@email.com"}</p>
-          <button className="mt-1.5 text-[12px] text-indigo-600 hover:underline">Change avatar</button>
+          <p className="text-[12px] text-muted-foreground">
+            {email || "your@email.com"}
+          </p>
+          <button className="mt-1.5 text-[12px] text-indigo-600 hover:underline">
+            Change avatar
+          </button>
         </div>
       </div>
 
       <Separator />
 
       <div className="space-y-5">
-        <Field label="Full name" hint="Shown across the dashboard and invoices.">
-          <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Jamie Dlamini" />
+        <Field
+          label="Full name"
+          hint="Shown across the dashboard and invoices."
+        >
+          <Input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Jamie Dlamini"
+          />
         </Field>
-        <Field label="Email address" hint="Used for login and billing notifications.">
-          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" />
+        <Field
+          label="Email address"
+          hint="Used for login and billing notifications."
+        >
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@company.com"
+          />
         </Field>
         <Field label="Job title">
           <Input placeholder="e.g. Head of Growth" />
@@ -75,8 +111,15 @@ function ProfileTab({ user }) {
       </div>
 
       <div className="flex justify-end gap-2 pt-2">
-        <Button variant="outline" size="sm" className="text-[13px] h-8">Cancel</Button>
-        <Button size="sm" className="text-[13px] h-8 bg-indigo-600 hover:bg-indigo-700">Save changes</Button>
+        <Button variant="outline" size="sm" className="text-[13px] h-8">
+          Cancel
+        </Button>
+        <Button
+          size="sm"
+          className="text-[13px] h-8 bg-indigo-600 hover:bg-indigo-700"
+        >
+          Save changes
+        </Button>
       </div>
     </div>
   );
@@ -98,15 +141,26 @@ function SecurityTab() {
       </div>
 
       <div className="flex justify-end gap-2 pt-2">
-        <Button size="sm" className="text-[13px] h-8 bg-indigo-600 hover:bg-indigo-700">Update password</Button>
+        <Button
+          size="sm"
+          className="text-[13px] h-8 bg-indigo-600 hover:bg-indigo-700"
+        >
+          Update password
+        </Button>
       </div>
 
       <Separator />
 
       <div>
-        <p className="text-[13px] font-medium mb-0.5">Two-factor authentication</p>
-        <p className="text-[12px] text-muted-foreground mb-3">Add a second layer of security to your account.</p>
-        <Button variant="outline" size="sm" className="text-[13px] h-8">Enable 2FA</Button>
+        <p className="text-[13px] font-medium mb-0.5">
+          Two-factor authentication
+        </p>
+        <p className="text-[12px] text-muted-foreground mb-3">
+          Add a second layer of security to your account.
+        </p>
+        <Button variant="outline" size="sm" className="text-[13px] h-8">
+          Enable 2FA
+        </Button>
       </div>
 
       <Separator />
@@ -114,18 +168,34 @@ function SecurityTab() {
       <div>
         <p className="text-[13px] font-medium mb-2">Active sessions</p>
         {[
-          { device: "Chrome on macOS", location: "Cape Town, ZA", current: true },
-          { device: "Safari on iPhone", location: "Johannesburg, ZA", current: false },
+          {
+            device: "Chrome on macOS",
+            location: "Cape Town, ZA",
+            current: true,
+          },
+          {
+            device: "Safari on iPhone",
+            location: "Johannesburg, ZA",
+            current: false,
+          },
         ].map((s) => (
-          <div key={s.device} className="flex items-center justify-between py-2.5 border-b last:border-0">
+          <div
+            key={s.device}
+            className="flex items-center justify-between py-2.5 border-b last:border-0"
+          >
             <div>
               <p className="text-[13px] font-medium">{s.device}</p>
               <p className="text-[11px] text-muted-foreground">{s.location}</p>
             </div>
-            {s.current
-              ? <span className="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-medium">Current</span>
-              : <button className="text-[12px] text-rose-500 hover:underline">Revoke</button>
-            }
+            {s.current ? (
+              <span className="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-medium">
+                Current
+              </span>
+            ) : (
+              <button className="text-[12px] text-rose-500 hover:underline">
+                Revoke
+              </button>
+            )}
           </div>
         ))}
       </div>
@@ -135,21 +205,41 @@ function SecurityTab() {
 
 function NotificationsTab() {
   const [prefs, setPrefs] = useState({
-    invoiceSent:   true,
+    invoiceSent: true,
     paymentFailed: true,
-    newCustomer:   false,
-    weeklyDigest:  true,
-    teamUpdates:   false,
+    newCustomer: false,
+    weeklyDigest: true,
+    teamUpdates: false,
   });
 
   const toggle = (key) => setPrefs((p) => ({ ...p, [key]: !p[key] }));
 
   const rows = [
-    { key: "invoiceSent",   label: "Invoice sent",     desc: "When an invoice is delivered to a customer."     },
-    { key: "paymentFailed", label: "Payment failed",   desc: "When a charge attempt fails."                    },
-    { key: "newCustomer",   label: "New customer",     desc: "When someone signs up for the first time."       },
-    { key: "weeklyDigest",  label: "Weekly digest",    desc: "A summary of your key metrics every Monday."     },
-    { key: "teamUpdates",   label: "Team activity",    desc: "When teammates make changes to shared resources." },
+    {
+      key: "invoiceSent",
+      label: "Invoice sent",
+      desc: "When an invoice is delivered to a customer.",
+    },
+    {
+      key: "paymentFailed",
+      label: "Payment failed",
+      desc: "When a charge attempt fails.",
+    },
+    {
+      key: "newCustomer",
+      label: "New customer",
+      desc: "When someone signs up for the first time.",
+    },
+    {
+      key: "weeklyDigest",
+      label: "Weekly digest",
+      desc: "A summary of your key metrics every Monday.",
+    },
+    {
+      key: "teamUpdates",
+      label: "Team activity",
+      desc: "When teammates make changes to shared resources.",
+    },
   ];
 
   return (
@@ -159,7 +249,9 @@ function NotificationsTab() {
           <div className="flex items-center justify-between py-3.5">
             <div>
               <p className="text-[13px] font-medium">{row.label}</p>
-              <p className="text-[12px] text-muted-foreground mt-0.5">{row.desc}</p>
+              <p className="text-[12px] text-muted-foreground mt-0.5">
+                {row.desc}
+              </p>
             </div>
             <Toggle checked={prefs[row.key]} onChange={() => toggle(row.key)} />
           </div>
@@ -189,8 +281,15 @@ function OrganizationTab() {
       </div>
 
       <div className="flex justify-end gap-2 pt-2">
-        <Button variant="outline" size="sm" className="text-[13px] h-8">Cancel</Button>
-        <Button size="sm" className="text-[13px] h-8 bg-indigo-600 hover:bg-indigo-700">Save changes</Button>
+        <Button variant="outline" size="sm" className="text-[13px] h-8">
+          Cancel
+        </Button>
+        <Button
+          size="sm"
+          className="text-[13px] h-8 bg-indigo-600 hover:bg-indigo-700"
+        >
+          Save changes
+        </Button>
       </div>
 
       <Separator />
@@ -199,12 +298,19 @@ function OrganizationTab() {
         <div className="flex items-start gap-3">
           <Trash2 size={16} className="text-rose-500 mt-0.5 shrink-0" />
           <div className="flex-1">
-            <p className="text-[13px] font-medium text-rose-700">Delete organization</p>
+            <p className="text-[13px] font-medium text-rose-700">
+              Delete organization
+            </p>
             <p className="text-[12px] text-rose-600/80 mt-0.5">
-              Permanently remove this workspace and all its data. This cannot be undone.
+              Permanently remove this workspace and all its data. This cannot be
+              undone.
             </p>
           </div>
-          <Button variant="outline" size="sm" className="text-[12px] h-7 border-rose-300 text-rose-600 hover:bg-rose-100 hover:text-rose-700 shrink-0">
+          <Button
+            variant="outline"
+            size="sm"
+            className="text-[12px] h-7 border-rose-300 text-rose-600 hover:bg-rose-100 hover:text-rose-700 shrink-0"
+          >
             Delete
           </Button>
         </div>
@@ -218,10 +324,10 @@ export default function Settings() {
   const [activeTab, setActiveTab] = useState("profile");
 
   const tabContent = {
-    profile:       <ProfileTab user={user} />,
-    security:      <SecurityTab />,
+    profile: <ProfileTab user={user} />,
+    security: <SecurityTab />,
     notifications: <NotificationsTab />,
-    organization:  <OrganizationTab />,
+    organization: <OrganizationTab />,
   };
 
   return (
@@ -243,7 +349,6 @@ export default function Settings() {
 
       <main className="flex-1 overflow-y-auto p-5 bg-muted/30">
         <div className="max-w-3xl mx-auto space-y-4">
-
           {/* Tab bar */}
           <div className="flex gap-1 border-b bg-background rounded-t-lg px-2 pt-2 -mb-px">
             {tabs.map(({ id, label, icon: Icon }) => (
@@ -273,7 +378,6 @@ export default function Settings() {
               {tabContent[activeTab]}
             </CardContent>
           </Card>
-
         </div>
       </main>
     </>
