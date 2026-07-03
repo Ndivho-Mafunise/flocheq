@@ -134,6 +134,16 @@ export const login = async (req, res) => {
     });
   }
 };
+export const googleCallback = async (req, res) => {
+  try {
+    generateJwtToken(res, req.user._id);
+    return res.redirect(`${process.env.CLIENT_URL}/dashboard`);
+  } catch (error) {
+    console.log("Error during Google callback", error);
+    return res.redirect(`${process.env.CLIENT_URL}/login?error=google`);
+  }
+};
+
 export const logout = async (req, res) => {
   try {
     res.clearCookie("token", {
