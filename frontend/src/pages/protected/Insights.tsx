@@ -24,9 +24,9 @@ const INSIGHTS_URL = import.meta.env.VITE_INSIGHTS_URL;
 
 // colour for each income type bar
 const typeColor: Record<string, string> = {
-  service:      "#6366f1",
+  service:      "#CFA75E",
   product:      "#38bdf8",
-  subscription: "#8b5cf6",
+  subscription: "#E0C084",
 };
 
 function formatYAxis(value: number) {
@@ -84,7 +84,7 @@ export default function Insights() {
         <div className="flex items-center gap-2.5">
           <button className="relative w-8 h-8 flex items-center justify-center rounded-md hover:bg-muted transition-colors text-foreground">
             <Bell size={16} />
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-brand-400" />
           </button>
           <span className="w-px h-5 bg-border" />
           <Button variant="outline" size="sm" className="text-[12px] h-7">Last 12 months</Button>
@@ -167,8 +167,8 @@ export default function Insights() {
                       <AreaChart data={monthlyData} margin={{ top: 0, right: 0, left: -22, bottom: 0 }}>
                         <defs>
                           <linearGradient id="gInsights" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%"   stopColor="#6366f1" stopOpacity={0.15} />
-                            <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
+                            <stop offset="0%"   stopColor="#CFA75E" stopOpacity={0.15} />
+                            <stop offset="100%" stopColor="#CFA75E" stopOpacity={0} />
                           </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
@@ -181,11 +181,11 @@ export default function Insights() {
                         <Area
                           type="monotone"
                           dataKey="revenue"
-                          stroke="#6366f1"
+                          stroke="#CFA75E"
                           strokeWidth={2}
                           fill="url(#gInsights)"
                           dot={false}
-                          activeDot={{ r: 4, fill: "#6366f1", strokeWidth: 0 }}
+                          activeDot={{ r: 4, fill: "#CFA75E", strokeWidth: 0 }}
                         />
                       </AreaChart>
                     </ResponsiveContainer>
@@ -219,7 +219,7 @@ export default function Insights() {
                           />
                           <Bar dataKey="value" radius={[0, 3, 3, 0]} maxBarSize={12}>
                             {typeChartData.map((entry) => (
-                              <Cell key={entry.type} fill={typeColor[entry.type.toLowerCase()] ?? "#6366f1"} />
+                              <Cell key={entry.type} fill={typeColor[entry.type.toLowerCase()] ?? "#CFA75E"} />
                             ))}
                           </Bar>
                         </BarChart>
@@ -232,7 +232,7 @@ export default function Insights() {
                             <div className="flex items-center gap-2">
                               <span
                                 className="w-2 h-2 rounded-full shrink-0"
-                                style={{ background: typeColor[r.type] ?? "#6366f1" }}
+                                style={{ background: typeColor[r.type] ?? "#CFA75E" }}
                               />
                               <span className="capitalize text-muted-foreground">{r.type}</span>
                             </div>
@@ -270,7 +270,7 @@ export default function Insights() {
                             <div className="flex items-center gap-2.5">
                               <span className="text-[11px] text-muted-foreground w-4 tabular-nums">{i + 1}</span>
                               <Avatar className="w-6 h-6 shrink-0">
-                                <AvatarFallback className="text-[9px] font-bold bg-indigo-100 text-indigo-700">
+                                <AvatarFallback className="text-[9px] font-bold bg-brand-100 text-brand-800">
                                   {getInitials(c.name)}
                                 </AvatarFallback>
                               </Avatar>

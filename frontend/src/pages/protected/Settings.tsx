@@ -48,7 +48,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (checked: b
       role="switch"
       aria-checked={checked}
       onClick={() => onChange(!checked)}
-      className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${checked ? "bg-indigo-600" : "bg-input"}`}
+      className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${checked ? "bg-brand-400" : "bg-input"}`}
     >
       <span
         className={`pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow-sm ring-0 transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`}
@@ -65,7 +65,7 @@ function ProfileTab({ user }: { user: AuthUser | null }) {
     <div className="space-y-6">
       <div className="flex items-center gap-4">
         <Avatar className="w-14 h-14">
-          <AvatarFallback className="text-[16px] font-bold bg-indigo-100 text-indigo-700">
+          <AvatarFallback className="text-[16px] font-bold bg-brand-100 text-brand-800">
             {(name || "U")
               .split(" ")
               .map((w) => w[0])
@@ -79,7 +79,7 @@ function ProfileTab({ user }: { user: AuthUser | null }) {
           <p className="text-[12px] text-muted-foreground">
             {email || "your@email.com"}
           </p>
-          <button className="mt-1.5 text-[12px] text-indigo-600 hover:underline">
+          <button className="mt-1.5 text-[12px] text-brand-700 hover:underline">
             Change avatar
           </button>
         </div>
@@ -120,7 +120,7 @@ function ProfileTab({ user }: { user: AuthUser | null }) {
         </Button>
         <Button
           size="sm"
-          className="text-[13px] h-8 bg-indigo-600 hover:bg-indigo-700"
+          className="text-[13px] h-8 bg-brand-400 hover:bg-brand-500"
         >
           Save changes
         </Button>
@@ -147,7 +147,7 @@ function SecurityTab() {
       <div className="flex justify-end gap-2 pt-2">
         <Button
           size="sm"
-          className="text-[13px] h-8 bg-indigo-600 hover:bg-indigo-700"
+          className="text-[13px] h-8 bg-brand-400 hover:bg-brand-500"
         >
           Update password
         </Button>
@@ -298,7 +298,7 @@ function OrganizationTab() {
         </Button>
         <Button
           size="sm"
-          className="text-[13px] h-8 bg-indigo-600 hover:bg-indigo-700"
+          className="text-[13px] h-8 bg-brand-400 hover:bg-brand-500"
         >
           Save changes
         </Button>
@@ -354,7 +354,7 @@ export default function Settings() {
         <div className="flex items-center gap-2.5">
           <button className="relative w-8 h-8 flex items-center justify-center rounded-md hover:bg-muted transition-colors text-foreground">
             <Bell size={16} />
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-brand-400" />
           </button>
         </div>
       </header>
@@ -369,7 +369,7 @@ export default function Settings() {
                 onClick={() => setActiveTab(id)}
                 className={`flex items-center gap-1.5 px-3 py-2 text-[13px] rounded-t-md border-b-2 transition-colors ${
                   activeTab === id
-                    ? "border-indigo-600 text-indigo-600 font-medium"
+                    ? "border-brand-400 text-brand-700 font-medium"
                     : "border-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >

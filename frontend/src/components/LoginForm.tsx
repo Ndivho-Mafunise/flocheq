@@ -40,7 +40,7 @@ export function LoginForm({ className, ...props }: ComponentProps<"div">) {
         className="bg-white rounded-2xl border border-slate-200 overflow-hidden"
         style={{ boxShadow: "0 4px 12px -2px rgb(16 24 40 / 0.08)" }}
       >
-        <div className="h-1 bg-brand-600" />
+        <div className="h-1 bg-brand-400" />
 
         <div className="p-[30px]">
           <div className="mb-6">
@@ -81,7 +81,7 @@ export function LoginForm({ className, ...props }: ComponentProps<"div">) {
                 </Label>
                 <Link
                   to="/forgot-password"
-                  className="text-xs text-brand-600 hover:underline"
+                  className="text-xs text-brand-700 hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -107,7 +107,7 @@ export function LoginForm({ className, ...props }: ComponentProps<"div">) {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-10 bg-brand-600 hover:bg-brand-700 text-white font-medium"
+              className="w-full h-10 bg-brand-400 hover:bg-brand-500 text-ink font-medium"
             >
               {isLoading ? (
                 <>
@@ -158,7 +158,7 @@ export function LoginForm({ className, ...props }: ComponentProps<"div">) {
             Don't have an account?{" "}
             <Link
               to="/register"
-              className="text-brand-600 font-medium hover:underline"
+              className="text-brand-700 font-medium hover:underline"
             >
               Sign up
             </Link>

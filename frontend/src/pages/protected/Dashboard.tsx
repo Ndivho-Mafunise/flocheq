@@ -98,11 +98,11 @@ export default function Dashboard() {
           <Separator orientation="vertical" className="h-5 hidden sm:block" />
           <Button variant="ghost" size="icon" className="relative h-8 w-8">
             <Bell size={16} />
-            <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+            <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-brand-400" />
           </Button>
           <Separator orientation="vertical" className="h-5" />
           <Button variant="outline" size="sm" className="text-[12px] h-7">Export</Button>
-          <Button size="sm" className="text-[12px] h-7 bg-indigo-600 hover:bg-indigo-700">
+          <Button size="sm" className="text-[12px] h-7 bg-brand-400 hover:bg-brand-500">
             + New report
           </Button>
         </div>
@@ -155,7 +155,7 @@ export default function Dashboard() {
                   </div>
                   <div className="flex items-center gap-4 text-[11px] text-muted-foreground">
                     <span className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-indigo-500 inline-block" /> Revenue
+                      <span className="w-2 h-2 rounded-full bg-brand-400 inline-block" /> Revenue
                     </span>
                     <span className="flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-muted-foreground/20 inline-block" /> Target
@@ -167,8 +167,8 @@ export default function Dashboard() {
                     <AreaChart data={revenueData} margin={{ top: 0, right: 0, left: -22, bottom: 0 }}>
                       <defs>
                         <linearGradient id="gRev" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%"   stopColor="#6366f1" stopOpacity={0.15} />
-                          <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
+                          <stop offset="0%"   stopColor="#CFA75E" stopOpacity={0.15} />
+                          <stop offset="100%" stopColor="#CFA75E" stopOpacity={0} />
                         </linearGradient>
                         <linearGradient id="gTgt" x1="0" y1="0" x2="0" y2="1">
                           <stop offset="0%"   stopColor="#94a3b8" stopOpacity={0.2} />
@@ -180,7 +180,7 @@ export default function Dashboard() {
                       <YAxis tickFormatter={formatYAxis} tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} axisLine={false} tickLine={false} />
                       <Tooltip content={ChartTooltip} />
                       <Area type="monotone" dataKey="target"  stroke="#94a3b8" strokeWidth={1.5} fill="url(#gTgt)" dot={false} />
-                      <Area type="monotone" dataKey="revenue" stroke="#6366f1" strokeWidth={2}   fill="url(#gRev)" dot={false} activeDot={{ r: 4, fill: "#6366f1", strokeWidth: 0 }} />
+                      <Area type="monotone" dataKey="revenue" stroke="#CFA75E" strokeWidth={2}   fill="url(#gRev)" dot={false} activeDot={{ r: 4, fill: "#CFA75E", strokeWidth: 0 }} />
                     </AreaChart>
                   </ResponsiveContainer>
                 </CardContent>
@@ -198,7 +198,7 @@ export default function Dashboard() {
                       <XAxis type="number" tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
                       <YAxis dataKey="channel" type="category" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} axisLine={false} tickLine={false} width={52} />
                       <Tooltip formatter={(v) => [`${v}%`, "Share"]} contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-                      <Bar dataKey="value" fill="#6366f1" radius={[0, 3, 3, 0]} maxBarSize={12} />
+                      <Bar dataKey="value" fill="#CFA75E" radius={[0, 3, 3, 0]} maxBarSize={12} />
                     </BarChart>
                   </ResponsiveContainer>
                 </CardContent>
@@ -212,7 +212,7 @@ export default function Dashboard() {
               <Card className="xl:col-span-2 shadow-none border">
                 <CardHeader className="px-5 py-3.5 flex flex-row items-center justify-between border-b">
                   <CardTitle className="text-[13px] font-semibold">Recent activity</CardTitle>
-                  <Button variant="link" className="text-[12px] h-auto p-0 text-indigo-600">View all →</Button>
+                  <Button variant="link" className="text-[12px] h-auto p-0 text-brand-700">View all →</Button>
                 </CardHeader>
                 <CardContent className="p-0">
                   {activity.map((item, index) => (

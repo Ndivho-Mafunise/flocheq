@@ -99,7 +99,7 @@ export default function ResetPassword() {
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
           {/* Top accent */}
-          <div className="h-1 bg-gradient-to-r from-indigo-500 via-indigo-400 to-indigo-600" />
+          <div className="h-1 bg-gradient-to-r from-brand-300 via-brand-400 to-brand-500" />
 
           <div className="p-8">
             {/* ── Success state ── */}
@@ -116,7 +116,7 @@ export default function ResetPassword() {
                   new password.
                 </p>
                 <Button
-                  className="w-full h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-medium"
+                  className="w-full h-10 bg-brand-400 hover:bg-brand-500 text-ink font-medium"
                   onClick={() => navigate("/login")}
                 >
                   Continue to login
@@ -125,8 +125,8 @@ export default function ResetPassword() {
             ) : (
               /* ── Form state ── */
               <>
-                <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-5">
-                  <KeyRound size={22} className="text-indigo-600" />
+                <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-5">
+                  <KeyRound size={22} className="text-brand-700" />
                 </div>
 
                 <h1 className="text-2xl font-bold text-slate-900 mb-1">
@@ -281,7 +281,7 @@ export default function ResetPassword() {
                   <Button
                     type="submit"
                     disabled={isLoading || !token}
-                    className="w-full h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-medium"
+                    className="w-full h-10 bg-brand-400 hover:bg-brand-500 text-ink font-medium"
                   >
                     {isLoading ? (
                       <>
@@ -312,7 +312,7 @@ export default function ResetPassword() {
           Didn't request this?{" "}
           <Link
             to="/login"
-            className="text-indigo-600 hover:underline font-medium"
+            className="text-brand-700 hover:underline font-medium"
           >
             Sign in
           </Link>

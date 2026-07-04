@@ -19,9 +19,9 @@ const REPORTS_URL = import.meta.env.VITE_REPORTS_URL;
 
 // type → colour for the breakdown table dot
 const typeColor: Record<string, string> = {
-  service:      "bg-indigo-500",
+  service:      "bg-brand-400",
   product:      "bg-sky-400",
-  subscription: "bg-violet-500",
+  subscription: "bg-brand-400",
 };
 
 const currentYear = new Date().getFullYear();
@@ -93,7 +93,7 @@ export default function Reports() {
           <select
             value={year}
             onChange={(e) => setYear(parseInt(e.target.value))}
-            className="px-3 py-1.5 text-[12px] rounded-md border bg-background focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="px-3 py-1.5 text-[12px] rounded-md border bg-background focus:outline-none focus:ring-1 focus:ring-brand-400"
           >
             {yearOptions.map((y) => (
               <option key={y} value={y}>{y}</option>
@@ -144,7 +144,7 @@ export default function Reports() {
                         formatter={(v) => [`$${Number(v ?? 0).toLocaleString()}`, "Revenue"]}
                         contentStyle={{ fontSize: 12, borderRadius: 8 }}
                       />
-                      <Bar dataKey="revenue" fill="#6366f1" radius={[3, 3, 0, 0]} maxBarSize={40} />
+                      <Bar dataKey="revenue" fill="#CFA75E" radius={[3, 3, 0, 0]} maxBarSize={40} />
                     </BarChart>
                   </ResponsiveContainer>
                 )}
@@ -187,7 +187,7 @@ export default function Reports() {
                             <td className="px-5 py-3 text-right text-muted-foreground tabular-nums">
                               <div className="flex items-center justify-end gap-2">
                                 <div className="w-16 h-1 bg-muted rounded-full overflow-hidden">
-                                  <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${share}%` }} />
+                                  <div className="h-full bg-brand-400 rounded-full" style={{ width: `${share}%` }} />
                                 </div>
                                 <span className="w-8 text-right">{share}%</span>
                               </div>

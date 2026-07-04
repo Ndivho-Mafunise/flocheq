@@ -19,9 +19,9 @@ const statusCls: Record<string, string> = {
 
 // type → badge colours
 const typeCls: Record<string, string> = {
-  service:      "bg-indigo-50 text-indigo-700",
+  service:      "bg-brand-50 text-brand-800",
   product:      "bg-sky-50    text-sky-700",
-  subscription: "bg-violet-50 text-violet-700",
+  subscription: "bg-brand-50 text-brand-800",
 };
 
 function getInitials(name = "") {
@@ -80,11 +80,11 @@ export default function Payments() {
         <div className="flex items-center gap-2.5">
           <button className="relative w-8 h-8 flex items-center justify-center rounded-md hover:bg-muted transition-colors text-foreground">
             <Bell size={16} />
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-brand-400" />
           </button>
           <span className="w-px h-5 bg-border" />
           <Button variant="outline" size="sm" className="text-[12px] h-7">Export</Button>
-          <Button size="sm" className="text-[12px] h-7 bg-indigo-600 hover:bg-indigo-700">
+          <Button size="sm" className="text-[12px] h-7 bg-brand-400 hover:bg-brand-500">
             + Record payment
           </Button>
         </div>
@@ -177,7 +177,7 @@ export default function Payments() {
                           <td className="px-5 py-3">
                             <div className="flex items-center gap-2.5">
                               <Avatar className="w-6 h-6 shrink-0">
-                                <AvatarFallback className="text-[9px] font-bold bg-indigo-100 text-indigo-700">
+                                <AvatarFallback className="text-[9px] font-bold bg-brand-100 text-brand-800">
                                   {getInitials(tx.customerName)}
                                 </AvatarFallback>
                               </Avatar>

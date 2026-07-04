@@ -11,7 +11,7 @@ export default function Billing() {
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-700">
           Billing
         </p>
         <h1 className="mt-2 text-3xl font-bold text-slate-900">

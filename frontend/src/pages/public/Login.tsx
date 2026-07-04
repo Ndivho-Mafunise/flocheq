@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { LoginForm } from "@/components/LoginForm";
+import Logo from "@/components/Logo";
 
 const lightPanel = {
   background: `
-    radial-gradient(ellipse 70% 50% at 50% -5%, rgba(124,58,237,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 90% 90%, rgba(124,58,237,0.06) 0%, transparent 55%),
-    #F5F3FF
+    radial-gradient(ellipse 70% 50% at 50% -5%, rgba(224,192,132,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 90% 90%, rgba(224,192,132,0.06) 0%, transparent 55%),
+    #FBF8F1
   `,
 };
 
 const dotGrid = {
-  backgroundImage: "radial-gradient(circle, rgba(124,58,237,0.07) 1px, transparent 1px)",
+  backgroundImage: "radial-gradient(circle, rgba(224,192,132,0.07) 1px, transparent 1px)",
   backgroundSize: "28px 28px",
 };
 
@@ -27,7 +28,7 @@ export default function LoginPage() {
 
         {/* Logo — pinned to top */}
         <Link to="/" className="absolute top-10 left-12">
-          <img src="/flocheq-logo-v2.png" alt="Flocheq" className="h-8 w-auto brightness-0 opacity-75" />
+          <Logo />
         </Link>
 
         {/* Copy — vertically centered */}
@@ -45,9 +46,9 @@ export default function LoginPage() {
           <ul className="mt-8 space-y-3">
             {["PCI DSS Level 1 certified", "135+ currencies supported", "Free 14-day trial"].map((item) => (
               <li key={item} className="flex items-center gap-3 text-[13px] text-[#374151]">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-600/10 border border-brand-600/20">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-400/15 border border-brand-400/50">
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M2 5l2.5 2.5L8 2.5" stroke="#7C3AED" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M2 5l2.5 2.5L8 2.5" stroke="#B0873F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
                 {item}

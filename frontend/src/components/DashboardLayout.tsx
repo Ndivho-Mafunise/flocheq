@@ -53,7 +53,7 @@ const channelData = [
 ];
 
 const activity = [
-  { id: 1, name: "Amara Osei",         action: "Upgraded to Pro",          time: "2m ago",  initials: "AO", color: "bg-violet-100 text-violet-700" },
+  { id: 1, name: "Amara Osei",         action: "Upgraded to Pro",          time: "2m ago",  initials: "AO", color: "bg-brand-100 text-brand-800" },
   { id: 2, name: "Liu Wei",            action: "New signup via referral",   time: "14m ago", initials: "LW", color: "bg-sky-100 text-sky-700" },
   { id: 3, name: "Fatima Al-Zahrawi", action: "Cancelled subscription",    time: "1h ago",  initials: "FA", color: "bg-rose-100 text-rose-600" },
   { id: 4, name: "Marcus Brennan",     action: "Reached 1k API calls",     time: "2h ago",  initials: "MB", color: "bg-emerald-100 text-emerald-700" },
@@ -68,7 +68,7 @@ const metrics = [
 ];
 
 const plans = [
-  { label: "Enterprise", count: "48",    pct: 62,  cls: "bg-indigo-500" },
+  { label: "Enterprise", count: "48",    pct: 62,  cls: "bg-brand-400" },
   { label: "Pro",        count: "214",   pct: 81,  cls: "bg-sky-400"    },
   { label: "Starter",    count: "891",   pct: 45,  cls: "bg-emerald-400"},
   { label: "Free",       count: "3,240", pct: 100, cls: "bg-muted"      },
@@ -154,7 +154,7 @@ export default function Dashboard() {
             onClick={() => setOrgOpen(!orgOpen)}
             className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-md hover:bg-accent transition-colors group"
           >
-            <div className="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center shrink-0">
+            <div className="w-6 h-6 rounded bg-brand-400 flex items-center justify-center shrink-0">
               <Zap size={11} className="text-white" />
             </div>
             <div className="flex-1 text-left min-w-0">
@@ -205,7 +205,7 @@ export default function Dashboard() {
                           ? "bg-accent text-accent-foreground font-medium"
                           : "text-muted-foreground hover:bg-accent hover:text-foreground"
                       }`}>
-                      <Icon size={15} className={`shrink-0 ${isActive ? "text-indigo-600" : "text-muted-foreground group-hover:text-foreground"}`} />
+                      <Icon size={15} className={`shrink-0 ${isActive ? "text-brand-700" : "text-muted-foreground group-hover:text-foreground"}`} />
                       <span className="flex-1 text-left truncate">{label}</span>
                       {badge && (
                         <Badge variant={badge === "Live" ? "default" : "secondary"}
@@ -240,7 +240,7 @@ export default function Dashboard() {
           {/* User */}
           <div className="pt-2 mt-1 border-t flex items-center gap-2 px-2 py-1.5">
             <Avatar className="w-6 h-6 shrink-0">
-              <AvatarFallback className="text-[9px] font-bold bg-indigo-100 text-indigo-700">JD</AvatarFallback>
+              <AvatarFallback className="text-[9px] font-bold bg-brand-100 text-brand-800">JD</AvatarFallback>
             </Avatar>
             <span className="text-[12px] font-medium flex-1 truncate">Jamie Dlamini</span>
             <CircleDot size={11} className="text-emerald-500 shrink-0" />
@@ -261,11 +261,11 @@ export default function Dashboard() {
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="icon" className="relative h-8 w-8">
               <Bell size={16} />
-              <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+              <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-brand-400" />
             </Button>
             <Separator orientation="vertical" className="h-5" />
             <Button variant="outline" size="sm" className="text-[12px] h-7">Export</Button>
-            <Button size="sm" className="text-[12px] h-7 bg-indigo-600 hover:bg-indigo-700">+ New report</Button>
+            <Button size="sm" className="text-[12px] h-7 bg-brand-400 hover:bg-brand-500">+ New report</Button>
           </div>
         </header>
 
@@ -304,7 +304,7 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center gap-4 text-[11px] text-muted-foreground">
                   <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-indigo-500 inline-block" />Revenue
+                    <span className="w-2 h-2 rounded-full bg-brand-400 inline-block" />Revenue
                   </span>
                   <span className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-muted-foreground/20 inline-block" />Target
@@ -316,8 +316,8 @@ export default function Dashboard() {
                   <AreaChart data={revenueData} margin={{ top: 0, right: 0, left: -22, bottom: 0 }}>
                     <defs>
                       <linearGradient id="gRev" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#6366f1" stopOpacity={0.15} />
-                        <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
+                        <stop offset="0%" stopColor="#CFA75E" stopOpacity={0.15} />
+                        <stop offset="100%" stopColor="#CFA75E" stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="gTgt" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#94a3b8" stopOpacity={0.2} />
@@ -329,7 +329,7 @@ export default function Dashboard() {
                     <YAxis tickFormatter={fmt} tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} axisLine={false} tickLine={false} />
                     <Tooltip content={ChartTooltip} />
                     <Area type="monotone" dataKey="target"  stroke="#94a3b8" strokeWidth={1.5} fill="url(#gTgt)" dot={false} />
-                    <Area type="monotone" dataKey="revenue" stroke="#6366f1" strokeWidth={2}   fill="url(#gRev)" dot={false} activeDot={{ r: 4, fill: "#6366f1", strokeWidth: 0 }} />
+                    <Area type="monotone" dataKey="revenue" stroke="#CFA75E" strokeWidth={2}   fill="url(#gRev)" dot={false} activeDot={{ r: 4, fill: "#CFA75E", strokeWidth: 0 }} />
                   </AreaChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -346,7 +346,7 @@ export default function Dashboard() {
                     <XAxis type="number" tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} axisLine={false} tickLine={false} tickFormatter={v => `${v}%`} />
                     <YAxis dataKey="channel" type="category" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} axisLine={false} tickLine={false} width={52} />
                     <Tooltip formatter={(v) => [`${v}%`, "Share"]} contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-                    <Bar dataKey="value" fill="#6366f1" radius={[0, 3, 3, 0]} maxBarSize={12} />
+                    <Bar dataKey="value" fill="#CFA75E" radius={[0, 3, 3, 0]} maxBarSize={12} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -360,7 +360,7 @@ export default function Dashboard() {
             <Card className="xl:col-span-2 shadow-none border">
               <CardHeader className="px-5 py-3.5 flex flex-row items-center justify-between border-b">
                 <CardTitle className="text-[13px] font-semibold">Recent activity</CardTitle>
-                <Button variant="link" className="text-[12px] h-auto p-0 text-indigo-600">View all →</Button>
+                <Button variant="link" className="text-[12px] h-auto p-0 text-brand-700">View all →</Button>
               </CardHeader>
               <CardContent className="p-0">
                 {activity.map((item, i) => (

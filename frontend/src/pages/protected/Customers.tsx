@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 const CUSTOMERS_URL = import.meta.env.VITE_CUSTOMERS_URL;
 
 const PLAN_COLOR: Record<string, string> = {
-  enterprise: "#6366f1",
+  enterprise: "#CFA75E",
   pro:        "#38bdf8",
   starter:    "#34d399",
   free:       "#94a3b8",
@@ -78,11 +78,11 @@ export default function Customers() {
         <div className="flex items-center gap-2.5">
           <button className="relative w-8 h-8 flex items-center justify-center rounded-md hover:bg-muted transition-colors text-foreground">
             <Bell size={16} />
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-brand-400" />
           </button>
           <span className="w-px h-5 bg-border" />
           <Button variant="outline" size="sm" className="text-[12px] h-7">Import</Button>
-          <Button size="sm" className="text-[12px] h-7 bg-indigo-600 hover:bg-indigo-700">
+          <Button size="sm" className="text-[12px] h-7 bg-brand-400 hover:bg-brand-500">
             + Add client
           </Button>
         </div>
@@ -112,7 +112,7 @@ export default function Customers() {
           {/* Toolbar */}
           <div className="flex items-center justify-between gap-3 px-5 py-3 border-b flex-wrap">
             {/* Search */}
-            <div className="flex items-center gap-2 px-3 h-8 border border-border rounded-md text-muted-foreground min-w-[240px] focus-within:border-indigo-600 focus-within:ring-[3px] focus-within:ring-indigo-600/[0.18] transition-all">
+            <div className="flex items-center gap-2 px-3 h-8 border border-border rounded-md text-muted-foreground min-w-[240px] focus-within:border-brand-400 focus-within:ring-[3px] focus-within:ring-brand-400/[0.18] transition-all">
               <Search size={14} />
               <input
                 type="text"
@@ -171,7 +171,7 @@ export default function Customers() {
                           <td className="px-5 py-3">
                             <div className="flex items-center gap-2.5">
                               <Avatar className="w-6 h-6 shrink-0">
-                                <AvatarFallback className="text-[9px] font-bold bg-indigo-100 text-indigo-700">
+                                <AvatarFallback className="text-[9px] font-bold bg-brand-100 text-brand-800">
                                   {getInitials(c.name)}
                                 </AvatarFallback>
                               </Avatar>

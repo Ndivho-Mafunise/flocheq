@@ -25,11 +25,11 @@ export default function VerifyEmail() {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-          <div className="h-1 bg-indigo-600" />
+          <div className="h-1 bg-brand-400" />
 
           <div className="p-8">
-            <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-5">
-              <MailCheck size={22} className="text-indigo-600" />
+            <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-5">
+              <MailCheck size={22} className="text-brand-700" />
             </div>
 
             <h1 className="text-2xl font-bold text-slate-900 mb-1">
@@ -68,7 +68,7 @@ export default function VerifyEmail() {
               <Button
                 type="submit"
                 disabled={isLoading || code.length < 6}
-                className="w-full h-10 bg-indigo-600 hover:bg-indigo-700 text-white font-medium"
+                className="w-full h-10 bg-brand-400 hover:bg-brand-500 text-ink font-medium"
               >
                 {isLoading ? (
                   <>

@@ -23,7 +23,7 @@ export default function Subscriptions() {
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-700">
           Subscriptions
         </p>
         <h1 className="mt-2 text-3xl font-bold text-slate-900">
@@ -41,7 +41,7 @@ export default function Subscriptions() {
             key={plan.name}
             className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
           >
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-700">
               {plan.name}
             </p>
             <div className="mt-4 flex items-end gap-2">

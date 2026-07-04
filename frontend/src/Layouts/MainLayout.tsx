@@ -130,7 +130,7 @@ export default function MainLayout() {
             onClick={() => setOrgOpen(!orgOpen)}
             className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-md hover:bg-accent transition-colors group"
           >
-            <div className="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center shrink-0">
+            <div className="w-6 h-6 rounded bg-brand-400 flex items-center justify-center shrink-0">
               <Zap size={11} className="text-white" />
             </div>
             <div className="flex-1 text-left min-w-0">
@@ -189,7 +189,7 @@ export default function MainLayout() {
                     >
                       <Icon
                         size={15}
-                        className={`shrink-0 ${isActive ? "text-indigo-600" : "text-muted-foreground group-hover:text-foreground"}`}
+                        className={`shrink-0 ${isActive ? "text-brand-700" : "text-muted-foreground group-hover:text-foreground"}`}
                       />
                       <span className="flex-1 text-left truncate">{label}</span>
                       {badge && (
@@ -251,7 +251,7 @@ export default function MainLayout() {
 
           <div className="flex items-center gap-2 px-2 py-1.5">
             <Avatar className="w-6 h-6 shrink-0">
-              <AvatarFallback className="text-[9px] font-bold bg-indigo-100 text-indigo-700">
+              <AvatarFallback className="text-[9px] font-bold bg-brand-100 text-brand-800">
                 {userInitials}
               </AvatarFallback>
             </Avatar>

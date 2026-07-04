@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 const footerLinks = {
   Product: [
@@ -8,7 +9,7 @@ const footerLinks = {
     { label: "Integrations", to: "#" },
   ],
   Company: [
-    { label: "About", to: "#" },
+    { label: "About", to: "/about" },
     { label: "Blog", to: "#" },
     { label: "Careers", to: "#" },
     { label: "Contact", to: "#" },
@@ -23,34 +24,30 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#FAFAFA] border-t border-[#E5E7EB] px-6 py-16">
+    <footer className="bg-brand-400 px-6 py-16">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2">
-            <Link to="/">
-              <img
-                src="/flocheq-logo-v2.png"
-                alt="Flocheq"
-                className="h-8 w-auto brightness-0 opacity-70 mb-6"
-              />
+            <Link to="/" className="inline-block mb-6">
+              <Logo variant="gold" />
             </Link>
-            <p className="text-sm leading-relaxed max-w-xs text-[#6B7280]">
+            <p className="text-sm leading-relaxed max-w-xs text-ink/80">
               The payment infrastructure built for SaaS teams who move fast. Collect revenue, track insights, and scale globally.
             </p>
-            <p className="mt-6 text-xs text-[#9CA3AF]">
+            <p className="mt-6 text-xs text-ink/60">
               © {new Date().getFullYear()} Flocheq. All rights reserved.
             </p>
           </div>
 
           {Object.entries(footerLinks).map(([group, links]) => (
             <div key={group}>
-              <h4 className="text-[#111111] font-semibold text-sm mb-5">{group}</h4>
+              <h4 className="text-ink font-semibold text-xs uppercase tracking-[0.2em] mb-5">{group}</h4>
               <ul className="space-y-3">
                 {links.map(({ label, to }) => (
                   <li key={label}>
                     <Link
                       to={to}
-                      className="text-sm text-[#9CA3AF] hover:text-[#374151] transition-colors"
+                      className="text-sm text-ink/70 hover:text-ink transition-colors"
                     >
                       {label}
                     </Link>
@@ -61,12 +58,12 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-[#E5E7EB] flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-[#9CA3AF]">Built for founders who mean business.</p>
+        <div className="mt-12 pt-8 border-t border-ink/15 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-ink/60">Built for founders who mean business.</p>
           <div className="flex items-center gap-6 text-xs">
-            <Link to="#" className="text-[#9CA3AF] hover:text-[#6B7280] transition">Privacy</Link>
-            <Link to="#" className="text-[#9CA3AF] hover:text-[#6B7280] transition">Terms</Link>
-            <Link to="#" className="text-[#9CA3AF] hover:text-[#6B7280] transition">Security</Link>
+            <Link to="#" className="text-ink/60 hover:text-ink transition">Privacy</Link>
+            <Link to="#" className="text-ink/60 hover:text-ink transition">Terms</Link>
+            <Link to="#" className="text-ink/60 hover:text-ink transition">Security</Link>
           </div>
         </div>
       </div>

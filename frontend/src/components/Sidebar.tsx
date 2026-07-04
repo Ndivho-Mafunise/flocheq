@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
+import Logo from "./Logo";
 
 const navigation = [
   {
@@ -70,15 +71,15 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="flex w-full shrink-0 flex-col border-r border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.98),rgba(15,23,42,0.92))] px-4 pb-4 pt-5 backdrop-blur-xl md:w-80">
-      <div className="rounded-[28px] border border-white/10 bg-white/[0.03] px-4 py-4 shadow-[0_24px_80px_rgba(15,23,42,0.45)]">
+    <aside className="flex w-full shrink-0 flex-col border-r border-white/10 bg-[linear-gradient(180deg,rgba(17,25,24,0.98),rgba(17,25,24,0.92))] px-4 pb-4 pt-5 backdrop-blur-xl md:w-80">
+      <div className="rounded-[28px] border border-white/10 bg-white/[0.03] px-4 py-4 shadow-[0_24px_80px_rgba(17,25,24,0.45)]">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl overflow-hidden bg-white/10 shadow-[0_16px_40px_rgba(99,102,241,0.35)]">
-            <img src="/flocheq-logo-v2.png" alt="Flocheq" className="h-full w-full object-contain" />
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 shadow-[0_16px_40px_rgba(224,192,132,0.35)]">
+            <Logo variant="dark" compact />
           </div>
 
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-violet-200/80">
+            <p className="text-sm uppercase tracking-[0.3em] text-brand-200/80">
               Flocheq
             </p>
             <h1 className="text-lg font-semibold text-white">
@@ -87,7 +88,7 @@ export default function Sidebar() {
           </div>
         </div>
 
-        <div className="mt-4 rounded-2xl border border-violet-400/20 bg-violet-500/10 px-3 py-3">
+        <div className="mt-4 rounded-2xl border border-brand-400/20 bg-brand-400/10 px-3 py-3">
           <div className="flex items-center justify-between text-sm text-slate-200">
             <span>Growth score</span>
             <span className="rounded-full bg-emerald-400/15 px-2 py-0.5 text-emerald-200">
@@ -112,7 +113,7 @@ export default function Sidebar() {
               to={item.path}
               className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${
                 isActive
-                  ? "bg-violet-600 text-white shadow-[0_12px_30px_rgba(139,92,246,0.35)]"
+                  ? "bg-brand-400 text-ink shadow-[0_12px_30px_rgba(224,192,132,0.35)]"
                   : "text-slate-300 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -140,7 +141,7 @@ export default function Sidebar() {
 
       <div className="mt-4 rounded-[24px] border border-white/10 bg-slate-950/80 px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-violet-500 text-slate-950">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-300 to-brand-500 text-slate-950">
             {user?.name?.charAt(0)?.toUpperCase() || "U"}
           </div>
           <div className="min-w-0">

@@ -7,7 +7,7 @@ export default function PaymentMethods() {
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-700">
           Payment methods
         </p>
         <h1 className="mt-2 text-3xl font-bold text-slate-900">
@@ -34,7 +34,7 @@ export default function PaymentMethods() {
               </div>
               <div className="flex items-center gap-3">
                 {method.default && (
-                  <span className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700">
+                  <span className="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-800">
                     Default
                   </span>
                 )}

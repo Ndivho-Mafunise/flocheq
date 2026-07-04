@@ -41,7 +41,9 @@ export const signupUser = async (req, res) => {
       generateJwtToken(res, user._id);
     } catch (error) {
       console.log("Error while signing token", error);
-      res.status(500).json({
+      return res.status(500).json({
+        success: false,
+        message: "server internal error",
         error: error.message,
       });
     }
@@ -89,14 +91,20 @@ export const login = async (req, res) => {
     if (!user) {
       return res.status(400).json({
         success: false,
-        message: "User not found",
+        message: "Invalid email or password",
+      });
+    }
+    if (!user.password) {
+      return res.status(400).json({
+        success: false,
+        message: "This account uses Google sign-in. Please continue with Google.",
       });
     }
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(400).json({
         success: false,
-        message: "Invalid credentials",
+        message: "Invalid email or password",
       });
     }
     if (!user.isVerified) {
@@ -109,7 +117,9 @@ export const login = async (req, res) => {
       generateJwtToken(res, user._id);
     } catch (error) {
       console.log("Error while signing token", error);
-      res.status(500).json({
+      return res.status(500).json({
+        success: false,
+        message: "server internal error",
         error: error.message,
       });
     }
