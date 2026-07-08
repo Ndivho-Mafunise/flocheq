@@ -17,10 +17,10 @@ export const verifyToken = async (req, res, next) => {
       });
     }
     req.userId = decoded.userId;
+    req.userRole = decoded.role;
     next();
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
+    res.status(401).json({
       success: false,
       message: "Unauthorized",
     });

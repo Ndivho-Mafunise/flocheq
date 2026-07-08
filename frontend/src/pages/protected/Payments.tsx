@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronRight, Bell } from "lucide-react";
+import { fetchWithAuth } from "@/lib/api";
 import type { TransactionsData } from "@/types/api";
 
 import { Badge }     from "@/components/ui/badge";
@@ -51,7 +52,7 @@ export default function Payments() {
         if (statusFilter) params.set("status", statusFilter);
         if (typeFilter)   params.set("type",   typeFilter);
 
-        const res  = await fetch(`${TRANSACTIONS_URL}?${params}`, { credentials: "include" });
+        const res  = await fetchWithAuth(`${TRANSACTIONS_URL}?${params}`);
         const json = await res.json();
 
         if (json.success) setData(json.data);

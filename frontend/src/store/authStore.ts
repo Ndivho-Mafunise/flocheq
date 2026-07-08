@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { fetchWithAuth } from "@/lib/api";
 import type { AuthResponse, User } from "@/types/auth";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -190,12 +191,11 @@ export const useAuthStore = create<AuthState>((set) => ({
     });
 
     try {
-      const response = await fetch(`${API_URL}/check-auth`, {
+      const response = await fetchWithAuth(`${API_URL}/check-auth`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
       });
 
       const data: AuthResponse = await response.json();

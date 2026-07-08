@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronRight, Search, Bell } from "lucide-react";
+import { fetchWithAuth } from "@/lib/api";
 import type { CustomersData } from "@/types/api";
 
 import { Button }    from "@/components/ui/button";
@@ -49,7 +50,7 @@ export default function Customers() {
         if (debouncedSearch) params.set("search", debouncedSearch);
         if (planFilter)      params.set("plan",   planFilter);
 
-        const res  = await fetch(`${CUSTOMERS_URL}?${params}`, { credentials: "include" });
+        const res  = await fetchWithAuth(`${CUSTOMERS_URL}?${params}`);
         const json = await res.json();
 
         if (json.success) setData(json.data);

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
+import { fetchWithAuth } from "@/lib/api";
 import type { ReportsData } from "@/types/api";
 
 import {
@@ -38,7 +39,7 @@ export default function Reports() {
       setLoading(true);
       try {
         const params = new URLSearchParams({ period, year: String(year) });
-        const res    = await fetch(`${REPORTS_URL}?${params}`, { credentials: "include" });
+        const res    = await fetchWithAuth(`${REPORTS_URL}?${params}`);
         const json   = await res.json();
         if (json.success) setData(json.data);
       } catch (error) {

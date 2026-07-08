@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronRight, ArrowUpRight, ArrowDownRight, Bell } from "lucide-react";
+import { fetchWithAuth } from "@/lib/api";
 import type { InsightsData } from "@/types/api";
 
 import {
@@ -44,7 +45,7 @@ export default function Insights() {
   useEffect(() => {
     async function load() {
       try {
-        const res  = await fetch(INSIGHTS_URL, { credentials: "include" });
+        const res  = await fetchWithAuth(INSIGHTS_URL);
         const json = await res.json();
         if (json.success) setData(json.data);
       } catch (error) {

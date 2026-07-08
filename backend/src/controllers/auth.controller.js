@@ -6,6 +6,14 @@ import {
 } from "../Resend/email.js";
 import crypto from "crypto";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import RefreshToken from "../models/refreshToken.model.js";
+import {
+  hashToken,
+  clearAuthCookies,
+  issueAuthTokens,
+  revokeRefreshFamily,
+} from "../utils/authTokens.js";
 
 export const verifyEmail = async (req, res) => {
   try {
@@ -118,6 +126,71 @@ export const resetPassword = async (req, res) => {
   }
 };
 
+export const refreshAccessToken = async (req, res) => {
+  try {
+    const incomingToken = req.cookies.refreshToken;
+    if (!incomingToken) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    let payload;
+    try {
+      payload = jwt.verify(incomingToken, process.env.REFRESH_TOKEN_SECRET);
+    } catch (error) {
+      clearAuthCookies(res);
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const { userId, family, jti } = payload;
+    const storedToken = await RefreshToken.findOne({ jti });
+
+    if (!storedToken || storedToken.tokenHash !== hashToken(incomingToken)) {
+      await revokeRefreshFamily(family);
+      clearAuthCookies(res);
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    if (storedToken.revoked) {
+      // this exact token was already rotated away once — someone is replaying
+      // an old refresh token, which only happens if it was stolen. Kill the
+      // whole session family so the thief (and the real user) are logged out.
+      await revokeRefreshFamily(family);
+      clearAuthCookies(res);
+      return res.status(401).json({
+        success: false,
+        message: "Session revoked, please log in again",
+      });
+    }
+
+    if (storedToken.expiresAt < new Date()) {
+      clearAuthCookies(res);
+      return res.status(401).json({ success: false, message: "Session expired" });
+    }
+
+    // rotation: this token is now spent, issue a fresh pair in the same family
+    storedToken.revoked = true;
+    await storedToken.save();
+
+    // re-read role from the DB (not the old token) so a role change takes
+    // effect on the next refresh instead of lingering until logout
+    const user = await User.findById(userId);
+    if (!user) {
+      clearAuthCookies(res);
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    await issueAuthTokens(res, userId, user.role, family);
+
+    return res.status(200).json({ success: true, message: "Token refreshed" });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "server internal error",
+      error: error.message,
+    });
+  }
+};
+
 export const checkAuth = async (req, res) => {
   try {
     const user = await User.findById(req.userId);
@@ -134,6 +207,7 @@ export const checkAuth = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
         isVerified: user.isVerified,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,

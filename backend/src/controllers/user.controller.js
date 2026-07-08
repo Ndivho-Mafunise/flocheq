@@ -1,5 +1,10 @@
+import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
-import { generateJwtToken } from "../utils/generateJwtToken.js";
+import {
+  issueAuthTokens,
+  revokeRefreshFamily,
+  clearAuthCookies,
+} from "../utils/authTokens.js";
 import { generateVerificationToken } from "../utils/generateVerificationToken.js";
 import { sendVerificationEmail } from "../Resend/email.js";
 
@@ -38,7 +43,7 @@ export const signupUser = async (req, res) => {
 
     // generate jwt
     try {
-      generateJwtToken(res, user._id);
+      await issueAuthTokens(res, user._id, user.role);
     } catch (error) {
       console.log("Error while signing token", error);
       return res.status(500).json({
@@ -67,6 +72,7 @@ export const signupUser = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
         isVerified: user.isVerified,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
@@ -97,7 +103,8 @@ export const login = async (req, res) => {
     if (!user.password) {
       return res.status(400).json({
         success: false,
-        message: "This account uses Google sign-in. Please continue with Google.",
+        message:
+          "This account uses Google sign-in. Please continue with Google.",
       });
     }
     const isMatch = await user.comparePassword(password);
@@ -114,7 +121,7 @@ export const login = async (req, res) => {
       });
     }
     try {
-      generateJwtToken(res, user._id);
+      await issueAuthTokens(res, user._id, user.role);
     } catch (error) {
       console.log("Error while signing token", error);
       return res.status(500).json({
@@ -131,6 +138,7 @@ export const login = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
         isVerified: user.isVerified,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
@@ -146,7 +154,7 @@ export const login = async (req, res) => {
 };
 export const googleCallback = async (req, res) => {
   try {
-    generateJwtToken(res, req.user._id);
+    await issueAuthTokens(res, req.user._id, req.user.role);
     return res.redirect(`${process.env.CLIENT_URL}/dashboard`);
   } catch (error) {
     console.log("Error during Google callback", error);
@@ -156,11 +164,19 @@ export const googleCallback = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    });
+    const incomingToken = req.cookies.refreshToken;
+    if (incomingToken) {
+      try {
+        const { family } = jwt.verify(
+          incomingToken,
+          process.env.REFRESH_TOKEN_SECRET,
+        );
+        await revokeRefreshFamily(family);
+      } catch (error) {
+        // already invalid/expired — nothing to revoke
+      }
+    }
+    clearAuthCookies(res);
     return res.status(200).json({
       success: true,
       message: "Logged out successfully ",

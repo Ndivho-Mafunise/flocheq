@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuthStore } from "../../store/authStore";
+import { fetchWithAuth } from "@/lib/api";
 import type { DashboardData } from "@/types/api";
 import type { TooltipContentProps } from "recharts";
 import type { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
@@ -60,7 +61,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadDashboard() {
       try {
-        const response = await fetch(DASHBOARD_URL, { credentials: "include" });
+        const response = await fetchWithAuth(DASHBOARD_URL);
         const json     = await response.json();
         if (json.success) setDashData(json.data);
       } catch (error) {

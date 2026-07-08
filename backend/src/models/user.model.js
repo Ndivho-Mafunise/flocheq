@@ -38,6 +38,11 @@ const userSchema = new Schema(
       enum: ["local", "google"],
       default: "local",
     },
+    role: {
+      type: String,
+      enum: ["admin", "user", "guest"],
+      default: "user",
+    },
 
     avatar: {
       type: String,
