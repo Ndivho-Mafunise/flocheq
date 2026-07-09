@@ -13,11 +13,6 @@ const router = Router();
 router.get("/", verifyToken, getTransactions);
 router.post("/", verifyToken, authorize("admin", "user"), createTransaction);
 router.put("/:id", verifyToken, authorize("admin", "user"), updateTransaction);
-router.delete(
-  "/:id",
-  verifyToken,
-  authorize("admin", "user"),
-  deleteTransaction,
-);
+router.delete("/:id", verifyToken, authorize("admin"), deleteTransaction);
 
 export default router;

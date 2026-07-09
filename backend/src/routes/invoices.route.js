@@ -13,6 +13,6 @@ const router = Router();
 router.get("/", verifyToken, getInvoices);
 router.post("/", verifyToken, authorize("admin", "user"), createInvoice);
 router.put("/:id", verifyToken, authorize("admin", "user"), updateInvoice);
-router.delete("/:id", verifyToken, authorize("admin", "user"), deleteInvoice);
+router.delete("/:id", verifyToken, authorize("admin"), deleteInvoice);
 
 export default router;

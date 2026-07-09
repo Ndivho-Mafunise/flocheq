@@ -47,7 +47,6 @@ const userSchema = new Schema(
     avatar: {
       type: String,
     },
-
     // These fields power email verification + password reset flows safely.
     isVerified: {
       type: Boolean,

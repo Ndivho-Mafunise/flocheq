@@ -9,7 +9,6 @@ import transactionsRouter from "./routes/transactions.route.js";
 import insightsRouter from "./routes/insights.route.js";
 import reportsRouter from "./routes/reports.route.js";
 import passport from "./config/passport.js";
-
 const app = express();
 
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
@@ -20,7 +19,6 @@ app.use((req, res, next) => {
   res.setHeader("Cache-Control", "no-store");
   next();
 });
-
 // auth
 app.use("/api/v1/auth", router);
 

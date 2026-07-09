@@ -15,6 +15,6 @@ router.get("/", verifyToken, getCustomers);
 router.post("/", verifyToken, authorize("admin", "user"), createCustomer);
 router.get("/:id", verifyToken, getCustomer);
 router.put("/:id", verifyToken, authorize("admin", "user"), updateCustomer);
-router.delete("/:id", verifyToken, authorize("admin", "user"), deleteCustomer);
+router.delete("/:id", verifyToken, authorize("admin"), deleteCustomer);
 
 export default router;
