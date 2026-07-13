@@ -9,7 +9,7 @@ export const verifyToken = async (req, res, next) => {
     });
   }
   try {
-    const decoded = Jwt.verify(token, process.env.SECRET);
+    const decoded = Jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     if (!decoded) {
       return res.status(401).json({
         success: false,

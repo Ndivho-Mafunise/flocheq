@@ -20,7 +20,7 @@ export const issueAuthTokens = async (
   role,
   family = crypto.randomUUID(),
 ) => {
-  const accessToken = jwt.sign({ userId, role }, process.env.SECRET, {
+  const accessToken = jwt.sign({ userId, role }, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN,
   });
 
