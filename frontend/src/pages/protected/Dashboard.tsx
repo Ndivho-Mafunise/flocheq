@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
 import { fetchWithAuth } from "@/lib/api";
 import type { DashboardData } from "@/types/api";
@@ -54,6 +55,7 @@ const formatYAxis = (value: number) => `$${(value / 1000).toFixed(0)}k`;
 
 export default function Dashboard() {
   const { user } = useAuthStore();
+  const navigate = useNavigate();
 
   const [dashData,    setDashData]    = useState<DashboardData | null>(null);
   const [dataLoading, setDataLoading] = useState(true);
@@ -213,7 +215,13 @@ export default function Dashboard() {
               <Card className="xl:col-span-2 shadow-none border">
                 <CardHeader className="px-5 py-3.5 flex flex-row items-center justify-between border-b">
                   <CardTitle className="text-[13px] font-semibold">Recent activity</CardTitle>
-                  <Button variant="link" className="text-[12px] h-auto p-0 text-brand-700">View all →</Button>
+                  <Button
+                    variant="link"
+                    className="text-[12px] h-auto p-0 text-brand-700"
+                    onClick={() => navigate("/payments")}
+                  >
+                    View all →
+                  </Button>
                 </CardHeader>
                 <CardContent className="p-0">
                   {activity.map((item, index) => (
