@@ -10,11 +10,17 @@ import insightsRouter from "./routes/insights.route.js";
 import reportsRouter from "./routes/reports.route.js";
 import subscriptionsRouter from "./routes/subscriptions.route.js";
 import passport from "./config/passport.js";
+import { stripeWebhook } from "./controllers/subscriptions.controller.js";
 const app = express();
 
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
+
+// Stripe needs the raw, unparsed body to verify the webhook signature,
+// so this route must be registered before the global express.json() below.
+app.post("/api/v1/subscriptions/webhook", express.raw({ type: "application/json" }), stripeWebhook);
+
 app.use(express.json());
 app.use((req, res, next) => {
   res.setHeader("Cache-Control", "no-store");

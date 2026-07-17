@@ -68,6 +68,34 @@ const userSchema = new Schema(
     resetPasswordExpiresAt: {
       type: Date,
     },
+
+    stripeCustomerId: {
+      type: String,
+    },
+
+    stripeSubscriptionId: {
+      type: String,
+    },
+
+    plan: {
+      type: String,
+      enum: ["free", "starter", "growth", "scale"],
+      default: "free",
+    },
+
+    subscriptionStatus: {
+      type: String,
+      enum: ["none", "trialing", "active", "past_due", "canceled", "unpaid"],
+      default: "none",
+    },
+
+    currentPeriodStart: {
+      type: Date,
+    },
+
+    currentPeriodEnd: {
+      type: Date,
+    },
   },
   {
     timestamps: true,

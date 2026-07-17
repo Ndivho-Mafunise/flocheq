@@ -132,6 +132,24 @@ export interface ReportsByPeriod {
   revenue: number;
 }
 
+export type SubscriptionPlan = "free" | "starter" | "growth" | "scale";
+
+export type SubscriptionStatus =
+  | "none"
+  | "trialing"
+  | "active"
+  | "past_due"
+  | "canceled"
+  | "unpaid";
+
+export interface SubscriptionData {
+  plan: SubscriptionPlan;
+  status: SubscriptionStatus;
+  currentPeriodStart: string | null;
+  currentPeriodEnd: string | null;
+  hasBillingAccount: boolean;
+}
+
 export interface ReportsByType {
   type: string;
   count: number;

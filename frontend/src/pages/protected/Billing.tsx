@@ -1,10 +1,93 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, Bell } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import CardBrandMark from "@/components/CardBrandMark";
+import { fetchWithAuth } from "@/lib/api";
+import type { SubscriptionData, SubscriptionPlan } from "@/types/api";
+
+const SUBSCRIPTIONS_URL = import.meta.env.VITE_SUBSCRIPTIONS_URL;
+
+const PLAN_PRICE: Record<SubscriptionPlan, number> = {
+  free: 0,
+  starter: 19,
+  growth: 79,
+  scale: 249,
+};
+
+const STATUS_BADGE: Record<
+  SubscriptionData["status"],
+  { label: string; className: string }
+> = {
+  active: {
+    label: "Active",
+    className: "text-emerald-700 bg-emerald-50 dark:bg-emerald-500/10 dark:text-emerald-400",
+  },
+  trialing: {
+    label: "Trial",
+    className: "text-sky-700 bg-sky-50 dark:bg-sky-500/10 dark:text-sky-400",
+  },
+  past_due: {
+    label: "Past due",
+    className: "text-amber-700 bg-amber-50 dark:bg-amber-500/10 dark:text-amber-400",
+  },
+  unpaid: {
+    label: "Unpaid",
+    className: "text-red-700 bg-red-50 dark:bg-red-500/10 dark:text-red-400",
+  },
+  canceled: {
+    label: "Canceled",
+    className: "text-muted-foreground bg-muted",
+  },
+  none: {
+    label: "No active plan",
+    className: "text-muted-foreground bg-muted",
+  },
+};
+
+function formatDate(date: string) {
+  return new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
 
 export default function Billing() {
+  const [subscription, setSubscription] = useState<SubscriptionData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetchWithAuth(SUBSCRIPTIONS_URL);
+        const json = await res.json();
+        if (json.success) setSubscription(json.data);
+      } catch (error) {
+        console.error("Failed to load subscription:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, []);
+
+  const plan = subscription?.plan ?? "free";
+  const status = subscription?.status ?? "none";
+  const badge = STATUS_BADGE[status];
+  const price = PLAN_PRICE[plan];
+
+  let periodProgress: { pct: number; daysLeft: number } | null = null;
+  if (subscription?.currentPeriodStart && subscription?.currentPeriodEnd) {
+    const start = new Date(subscription.currentPeriodStart).getTime();
+    const end = new Date(subscription.currentPeriodEnd).getTime();
+    const now = Date.now();
+    const pct = Math.min(100, Math.max(0, ((now - start) / (end - start)) * 100));
+    const daysLeft = Math.max(0, Math.ceil((end - now) / (1000 * 60 * 60 * 24)));
+    periodProgress = { pct, daysLeft };
+  }
+
   return (
     <>
       <header className="border-b bg-background px-6 py-3 flex items-center justify-between shrink-0">
@@ -30,9 +113,9 @@ export default function Billing() {
                 <CardTitle className="text-[14px] font-semibold">
                   Current plan
                 </CardTitle>
-                <span className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-700 bg-emerald-50 dark:bg-emerald-500/10 dark:text-emerald-400 px-2.5 py-1 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  Active
+                <span className={`flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full ${badge.className}`}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                  {badge.label}
                 </span>
               </div>
             </CardHeader>
@@ -40,14 +123,20 @@ export default function Billing() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="flex items-baseline gap-2">
-                    <p className="text-xl font-semibold">Growth</p>
-                    <p className="text-[13px] text-muted-foreground">
-                      <span className="font-semibold text-foreground">$79</span>
-                      /month
+                    <p className="text-xl font-semibold">
+                      {loading ? "…" : plan[0].toUpperCase() + plan.slice(1)}
                     </p>
+                    {price > 0 && (
+                      <p className="text-[13px] text-muted-foreground">
+                        <span className="font-semibold text-foreground">${price}</span>
+                        /month
+                      </p>
+                    )}
                   </div>
                   <p className="text-[12px] text-muted-foreground mt-1">
-                    Renews on Aug 1, 2026 · Billed monthly
+                    {subscription?.currentPeriodEnd
+                      ? `Renews on ${formatDate(subscription.currentPeriodEnd)} · Billed monthly`
+                      : "No active subscription"}
                   </p>
                 </div>
                 <Button asChild size="sm" className="shrink-0">
@@ -56,15 +145,23 @@ export default function Billing() {
               </div>
 
               {/* Billing period progress */}
-              <div>
-                <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-1.5">
-                  <span>Current period · Jul 1 – Aug 1</span>
-                  <span>22 days left</span>
+              {periodProgress && subscription?.currentPeriodStart && subscription?.currentPeriodEnd && (
+                <div>
+                  <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-1.5">
+                    <span>
+                      Current period · {formatDate(subscription.currentPeriodStart)} –{" "}
+                      {formatDate(subscription.currentPeriodEnd)}
+                    </span>
+                    <span>{periodProgress.daysLeft} days left</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-brand-400"
+                      style={{ width: `${periodProgress.pct}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-                  <div className="h-full w-[29%] rounded-full bg-brand-400" />
-                </div>
-              </div>
+              )}
             </CardContent>
           </Card>
 
